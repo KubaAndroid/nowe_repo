@@ -1,0 +1,10 @@
+.main {
+    margin: 0.5rem auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #E8E3D6;
+
+}
