@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 import { MenuItem } from '../../model/MenuItem'
 import styles from './MenuItemLayout.module.css';
-import pickl from '../../img/pickls.png';
 import MenuCard from './MenuCard';
 import OrderContext from '../../store/order-context';
 
@@ -18,15 +17,21 @@ function MenuItemLayout({ menuItem }: MenuItemType) {
         <li className={styles.item}>
             <MenuCard>
                 <div className={styles.image}>
-                    <img src={pickl} alt="good food!" />
+                    <img src={menuItem.imgUrl} alt="good food!" />
                 </div>
                 <div className={styles.content}>
                     <h3>{menuItem.name}</h3>
-                    <address>{ menuItem.price}</address>
-                    <p>{ menuItem.description}</p>
+                    <p>{menuItem.description}</p>
+                    <address>Price: { menuItem.price}</address>
                 </div>
-                <div className={ styles.actions }>
-                    <button onClick={addItemToOrder}>Buy!</button>
+                {/* div class that holds ADD button or 2 rows and 3 columns of buttons and text  */}
+                <div className={styles.actions}> 
+                    {ordersContext.orderedItems === 0 ? (
+                        <button onClick={addItemToOrder}>Buy!</button>
+                    ) : (
+                        <button onClick={addItemToOrder}>Buy more!</button>
+                    )}
+                    
                 </div>
             </MenuCard>
         </li>

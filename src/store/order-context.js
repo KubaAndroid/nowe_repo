@@ -28,9 +28,11 @@ export function OrderContextProvider(props) {
         removeOrder: removeOrderHandler
     };
 
-    return <OrderContext.Provider value={context}>
-        {props.children}
-    </OrderContext.Provider>
+    return (
+        <OrderContext.Provider value={context}>
+            {props.children}
+        </OrderContext.Provider>
+    )
 }
 
 export default OrderContext

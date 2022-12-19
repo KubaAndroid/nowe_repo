@@ -1,0 +1,7 @@
+.container {
+    display: flex;
+    height: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
