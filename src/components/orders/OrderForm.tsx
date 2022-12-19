@@ -58,17 +58,17 @@ function OrderForm() {
     }
 
     async function postOrder(order: UserOrder) {
-    await fetch('http://localhost:5000/orders', {
-      method: "POST",
-      body: JSON.stringify(order),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(() => {
-        // TODO: context - clear the order
-      navigate('/', {replace: true})
-    })
-  }
+        await fetch('http://localhost:5000/orders', {
+        method: "POST",
+        body: JSON.stringify(order),
+        headers: {
+            "Content-Type": "application/json"
+        }
+        }).then(() => {
+            // TODO: context - clear the order
+        navigate('/', {replace: true})
+        })
+    }
    
   return (
       <div>
