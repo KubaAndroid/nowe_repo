@@ -7,6 +7,9 @@ const OrderContext = createContext({
     removeOrder: (id) => { }
 });
 
+// TODO: price for a whole order
+// TODO: group same items
+
 export function OrderContextProvider(props) {
     const [userOrder, setUserOrder] = useState([]);
 

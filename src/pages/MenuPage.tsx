@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import MenuList from "../components/menu/MenuList";
-import { MenuItem } from "../model/MenuItem";
+import { MenuItem } from "../model/MenuItemModel";
 
 
 const MenuPage = () => {
@@ -18,7 +18,6 @@ const MenuPage = () => {
   const fetchMenuItems = async () => {
     const res = await fetch('http://localhost:5000/menuItems')
     const data = await res.json()
-    console.log(data)
     return data
   }
 

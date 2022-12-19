@@ -1,5 +1,5 @@
 import React from 'react'
-import { MenuItem } from '../../model/MenuItem'
+import { MenuItem } from '../../model/MenuItemModel'
 import MenuItemLayout from './MenuItemLayout'
 import styles from './MenuList.module.css'
 

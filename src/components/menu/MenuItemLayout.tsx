@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { MenuItem } from '../../model/MenuItem'
+import { MenuItem } from '../../model/MenuItemModel'
 import styles from './MenuItemLayout.module.css';
 import MenuCard from './MenuCard';
 import OrderContext from '../../store/order-context';

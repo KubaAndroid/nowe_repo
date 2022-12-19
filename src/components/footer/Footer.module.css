@@ -1,9 +1,14 @@
 .footer {
-  width: 100%;
+  width: 80%;
   height: 5rem;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   background-color: #C5B7A2;
   padding: 0 10%;
+}
+
+.footer a {
+  text-decoration: none;
 }

@@ -2,7 +2,7 @@ import ContactForm from "../components/contact/ContactForm"
 
 const ContactPage = () => {
   return (
-    <section>
+    <section className='contact_page'>
       <h1>Contact us!</h1>
       <ContactForm />
     </section>

@@ -45,7 +45,7 @@ function ContactForm() {
           <label htmlFor="message">Message</label>
           <textarea id="message" required ref={messageInputRef} />
         </div>
-        <div className={styles.action}>
+        <div className={styles.actions}>
             <button>Send message</button>
         </div>
       </form>

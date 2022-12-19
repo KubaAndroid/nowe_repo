@@ -9,11 +9,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <OrderContextProvider>
     <React.StrictMode>
-      <BrowserRouter>
+    <BrowserRouter>
+      <OrderContextProvider>
         <App />
+        </OrderContextProvider>
       </BrowserRouter>
     </React.StrictMode>
-  </OrderContextProvider>
 );
