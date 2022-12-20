@@ -2,6 +2,6 @@
     display: flex;
     height: 700px;
     flex-direction: column;
-  justify-content: space-between;
-  align-content: center;
+    justify-content: space-between;
+    align-content: center;
 }

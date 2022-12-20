@@ -24,7 +24,7 @@ function OrdersList() {
   
   return (
     isLoading ? (
-      <div className={styles.container}>
+      <div>
         Loading...
       </div>
     ) : (
