@@ -1,18 +1,23 @@
-import React, {useContext} from 'react'
 import { MenuItem } from '../../model/MenuItemModel'
 import styles from './MenuItemLayout.module.css';
 import MenuCard from './MenuCard';
-import OrderContext from '../../store/order-context';
+import { useOrderContext } from '../../store/OrdersContext';
 
 interface MenuItemType {
     menuItem: MenuItem
 }
 
 function MenuItemLayout({ menuItem }: MenuItemType) {
-    const ordersContext = useContext(OrderContext);
-    function addItemToOrder() {
-        ordersContext.addOrder(menuItem)
-    }
+    const {
+        getOrderItemQuantity,
+        increaseOrderItemQuantity,
+        // removeOrderItemQuantity,
+        // removeOrderItem
+        // orderQuantity
+    } = useOrderContext()
+
+    const itemsQuantity = getOrderItemQuantity(menuItem.id)
+
     return (
         <li className={styles.item}>
             <MenuCard>
@@ -26,11 +31,16 @@ function MenuItemLayout({ menuItem }: MenuItemType) {
                 </div>
                 {/* div class that holds ADD button or 2 rows and 3 columns of buttons and text  */}
                 <div className={styles.actions}> 
-                    {ordersContext.orderedItems === 0 ? (
+                    {itemsQuantity === 0 ? (
+                        <button onClick={() => increaseOrderItemQuantity(menuItem.id)}>Buy!</button>
+                    ) : (
+                            <button onClick={() => increaseOrderItemQuantity(menuItem.id)}>Buy more! { itemsQuantity }</button>
+                    )}
+                    {/* {ordersContext.orderedItems === 0 ? (
                         <button onClick={addItemToOrder}>Buy!</button>
                     ) : (
                         <button onClick={addItemToOrder}>Buy more!</button>
-                    )}
+                    )} */}
                     
                 </div>
             </MenuCard>

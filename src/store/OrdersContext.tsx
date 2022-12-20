@@ -1,10 +1,6 @@
 import { createContext, ReactNode, useContext } from "react"
-import OrderItem from "../components/orders/OrderItem"
 import { useLocalStorage } from "./LocalStorage"
 
-type OrderedItemsProviderProps = {
-    children: ReactNode
-}
 
 type OrderCartItem = {
     id: number,
@@ -12,30 +8,35 @@ type OrderCartItem = {
 }
 
 type OrderedItemsContext = {
-    getOrderedItemQuantity: (id: number) => number
-    addOrderItemQuantity: (id: number) => void
-    removeOrderItemQuantity: (id: number) => void
+    getOrderItemQuantity: (id: number) => number
+    increaseOrderItemQuantity: (id: number) => void
+    reduceOrderItemQuantity: (id: number) => void
     removeOrderItem: (id: number) => void
     orderQuantity: number
     orderItems: OrderCartItem[]
 }
 
-const OrderedItemsContext = createContext({} as OrderedItemsContext)
+const CreateOrderedItemsContext = createContext({} as OrderedItemsContext)
 
 export function useOrderContext() {
-    return useContext(OrderedItemsContext)
+    return useContext(CreateOrderedItemsContext)
+}
+
+type OrderedItemsProviderProps = {
+    children: ReactNode
 }
 
 export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
-
     const [orderItems, setOrderItems] = useLocalStorage<OrderCartItem[]>("order-items", [])
+
     const orderQuantity = orderItems.reduce((quantity, item) => item.quantity + quantity, 0)
 
-    function getOrderedItemQuantity(id: number) {
+    function getOrderItemQuantity(id: number) {
         return orderItems.find(item => item.id === id)?.quantity || 0
     }
 
-    function addOrderItemQuantity(id: number) {
+    function increaseOrderItemQuantity(id: number) {
+        console.log(`addOrderItemQuantity id: ${id}`)
         setOrderItems(currentItems => {
             if (currentItems.find(item => item.id === id) == null) {
                 return [...orderItems, {id, quantity: 1}]
@@ -51,7 +52,7 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
         })
     }
 
-    function removeOrderItemQuantity(id: number) {
+    function reduceOrderItemQuantity(id: number) {
         setOrderItems(currentItems => {
             if (currentItems.find(item => item.id === id)?.quantity === 1) {
                 return currentItems.filter(item => item.id !== id)
@@ -74,17 +75,17 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     }
 
     return (
-        <OrderedItemsContext.Provider
+        <CreateOrderedItemsContext.Provider
             value={{
-                getOrderedItemQuantity,
-                addOrderItemQuantity,
-                removeOrderItemQuantity,
+                getOrderItemQuantity,
+                increaseOrderItemQuantity,
+                reduceOrderItemQuantity,
                 removeOrderItem,
-                orderQuantity,
-                orderItems
+                orderItems,
+                orderQuantity
         }}>
             {children}
-        </OrderedItemsContext.Provider>
+        </CreateOrderedItemsContext.Provider>
     )
 
 }

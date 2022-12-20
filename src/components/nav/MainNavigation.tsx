@@ -1,11 +1,16 @@
-import React, { useContext } from 'react'
+// import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './MainNavigation.module.css'
 import pyra from '../../img/potato_logo.png';
-import OrderContext from '../../store/order-context';
+// import OrderContext from '../../store/order-context';
+import { useOrderContext } from '../../store/OrdersContext';
 
 const MainNavigation = () => {
-  const orderContext = useContext(OrderContext)
+  // const orderContext = useContext(OrderContext)
+  const {
+    orderQuantity
+  } = useOrderContext()
+
     return (
         <header className={styles.header}>
           <div>
@@ -18,7 +23,7 @@ const MainNavigation = () => {
                     <li><Link to='/'>Menu</Link></li>
               <li><Link to='/order'>
                 Order
-                <span className={styles.badge}>{orderContext.orderedItems}</span>
+                <span className={styles.badge}>{orderQuantity}</span>
               </Link></li>
                     <li><Link to='/orderslist'>Orders List</Link></li>
                   </ul>
@@ -29,3 +34,4 @@ const MainNavigation = () => {
 }
 
 export default MainNavigation
+
