@@ -27,7 +27,7 @@ const MenuPage = () => {
     return (
       <section>
         <h1>Menu</h1>
-        <h2>Today's recommendations</h2>
+        <h2>Today's recommendations:</h2>
         <MenuList items={menuItems} />
       </section>
     )

@@ -12,9 +12,11 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <OrderedItemsProvider>
-          <App />
+      {/* <OrderContextProvider> */}
+      <OrderedItemsProvider>
+        <App />
         </OrderedItemsProvider>
+        {/* </OrderContextProvider> */}
       </BrowserRouter>
     </React.StrictMode>
 );

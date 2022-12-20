@@ -1,7 +1,9 @@
+import React, {useContext, useEffect} from 'react'
 import { MenuItem } from '../../model/MenuItemModel'
 import styles from './MenuItemLayout.module.css';
 import MenuCard from './MenuCard';
 import { useOrderContext } from '../../store/OrdersContext';
+// import OrderContext from '../../store/order-context';
 
 interface MenuItemType {
     menuItem: MenuItem
@@ -11,13 +13,11 @@ function MenuItemLayout({ menuItem }: MenuItemType) {
     const {
         getOrderItemQuantity,
         increaseOrderItemQuantity,
-        // removeOrderItemQuantity,
-        // removeOrderItem
-        // orderQuantity
+        reduceOrderItemQuantity,
+        removeOrderItem,
+        orderQuantity
     } = useOrderContext()
-
-    const itemsQuantity = getOrderItemQuantity(menuItem.id)
-
+    let quantity = getOrderItemQuantity(menuItem.id)
     return (
         <li className={styles.item}>
             <MenuCard>
@@ -31,16 +31,17 @@ function MenuItemLayout({ menuItem }: MenuItemType) {
                 </div>
                 {/* div class that holds ADD button or 2 rows and 3 columns of buttons and text  */}
                 <div className={styles.actions}> 
-                    {itemsQuantity === 0 ? (
-                        <button onClick={() => increaseOrderItemQuantity(menuItem.id)}>Buy!</button>
+                    {quantity === 0 ? (
+                        <div>
+                            <button onClick={() => increaseOrderItemQuantity(menuItem.id)}>Buy!</button>
+                        </div>
                     ) : (
-                            <button onClick={() => increaseOrderItemQuantity(menuItem.id)}>Buy more! { itemsQuantity }</button>
+                            <div>
+                                <button onClick={() => reduceOrderItemQuantity(menuItem.id)}>-</button>
+                                <button onClick={() => increaseOrderItemQuantity(menuItem.id)}>{quantity}</button>
+                                <button onClick={() => increaseOrderItemQuantity(menuItem.id)}>+</button>
+                            </div>
                     )}
-                    {/* {ordersContext.orderedItems === 0 ? (
-                        <button onClick={addItemToOrder}>Buy!</button>
-                    ) : (
-                        <button onClick={addItemToOrder}>Buy more!</button>
-                    )} */}
                     
                 </div>
             </MenuCard>

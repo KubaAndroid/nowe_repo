@@ -1,4 +1,4 @@
-// import React, { useContext } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './MainNavigation.module.css'
 import pyra from '../../img/potato_logo.png';
