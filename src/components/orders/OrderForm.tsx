@@ -2,11 +2,13 @@ import React, { FormEvent, MutableRefObject, useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserOrder } from '../../model/UserOrderModel';
 import { UserModel } from '../../model/UserModel';
-import OrderContext from '../../store/order-context';
+// import OrderContext from '../../store/order-context';
 import styles from './OrderForm.module.css';
+import { useOrderContext } from '../../store/OrdersContext';
 
 function OrderForm() {
-    const ordersContext = useContext(OrderContext);
+  // const ordersContext = useContext(OrderContext);
+  const { orderedMenuItems, orderedItems } = useOrderContext()
     const navigate = useNavigate();
     
     const firstNameInputRef: MutableRefObject<HTMLInputElement | null> = useRef(null);
@@ -31,22 +33,21 @@ function OrderForm() {
         const enteredUserPhoneNumber = phoneNumberInputRef.current?.value
         const enteredUserEmailAddress = emailAddressInputRef.current?.value
 
-        const _user: UserModel = {
-            id: Math.floor(Math.random() * (10000000)) + 1,
-            first_name: enteredUserFirstName,
-            last_name: enteredUserLastName,
-            email_address: enteredUserEmailAddress,
-            phone_number: enteredUserPhoneNumber,
-            address_street: enteredUserStreetName,
-            address_number: enteredUserStreetNumber,
-            address_city: enteredUserCityNumber,
-            address_zip_code: enteredUserZipCode
+      const _user: UserModel = {
+          id: Math.floor(Math.random() * (10000000)) + 1,
+          first_name: enteredUserFirstName,
+          last_name: enteredUserLastName,
+          email_address: enteredUserEmailAddress,
+          phone_number: enteredUserPhoneNumber,
+          address_street: enteredUserStreetName,
+          address_number: enteredUserStreetNumber,
+          address_city: enteredUserCityNumber,
+          address_zip_code: enteredUserZipCode
         }
 
-        const orderedItemsIds = ordersContext.order.map(({ id }) => id);
+        const orderedItemsIds = orderedMenuItems.map(({ id }) => id);
 
         const _userOrder: UserOrder = {
-            order_id: Math.floor(Math.random() * (10000000)) + 1,
             user_id: _user.id,
             date: new Date().toString(),
             menu_items: orderedItemsIds
