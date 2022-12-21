@@ -52,16 +52,11 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
         return orderedItems.find(item => item.id === id)?.quantity || 0
     }
 
-    function getOrderItemPrice(id: number) {
-        return orderedItems.find(item => item.id === id)?.price || 0
-    }
-
     function getMenuItemById(id: number) {
         return menuItems.find(item => item.id === id)
     }
 
     function increaseOrderItemQuantity(id: number) {
-        console.log(`addOrderItemQuantity id: ${id}`)
         const newMenuItem = getMenuItemById(id)!
         setOrderedMenuItems([...orderedMenuItems, newMenuItem!])
         setOrderItems(currentItems => {
@@ -80,7 +75,6 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     }
 
     function reduceOrderItemQuantity(id: number) {
-        const newMenuItem = getMenuItemById(id)
         setOrderItems(currentItems => {
             if (currentItems.find(item => item.id === id)?.quantity === 1) {
                 return currentItems.filter(item => item.id !== id)
