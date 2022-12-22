@@ -11,7 +11,6 @@ interface MenuItemType {
 
 function MenuItemLayout({ menuItem }: MenuItemType) {
     const [isModalOpen, setIsModalOpen] = useState<Boolean>(false)
-
     const {
         getOrderItemQuantity,
         increaseOrderItemQuantity,
