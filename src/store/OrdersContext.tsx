@@ -16,6 +16,7 @@ type OrderedItemsContext = {
     orderQuantity: number
     orderedItems: OrderCartItem[]
     orderedMenuItems: MenuItem[]
+    clearOrder: () => void
 }
 
 const CreateOrderedItemsContext = createContext({} as OrderedItemsContext)
@@ -47,6 +48,11 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     }
 
     const orderQuantity = orderedItems?.reduce((quantity, item) => item.quantity + quantity, 0)
+
+    function clearOrder() {
+        setOrderItems([]);
+        setOrderedMenuItems([])
+    }
 
     function getOrderItemQuantity(id: number) {
         return orderedItems.find(item => item.id === id)?.quantity || 0
@@ -108,7 +114,8 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
                 removeOrderItem,
                 orderedItems,
                 orderQuantity,
-                orderedMenuItems
+                orderedMenuItems,
+                clearOrder
         }}>
             {children}
         </CreateOrderedItemsContext.Provider>
