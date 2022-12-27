@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { OrderedItemsProvider } from './store/OrdersContext';
-// import { OrderContextProvider } from './store/order-context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,11 +11,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
       <BrowserRouter>
-      {/* <OrderContextProvider> */}
       <OrderedItemsProvider>
         <App />
         </OrderedItemsProvider>
-        {/* </OrderContextProvider> */}
       </BrowserRouter>
     </React.StrictMode>
 );
