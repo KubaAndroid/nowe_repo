@@ -1,3 +1,65 @@
-.item {
-    
+.orderItem {
+    width: 100vh;
+    border-radius: 6px;
+    box-shadow: 2px -2px 5px 2px rgba(0,0,0,0.2);
+    color: #fff;
+    background-color: #C5B7A2;
+    margin: 20px auto 0 auto;
+    padding: 10px 20px;
+    border: 1px solid #e0d7c9;
+    border-radius: 14px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.quantity {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+.orderItem button {
+  font: inherit;
+  cursor: pointer;
+  color: #545041;
+  border: 1px solid #545041;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+}
+
+.orderItem button:hover,
+.orderItem button:active {
+  background-color: #ffe2ed;
+}
+
+.confirmButton {
+  font: inherit;
+  cursor: pointer;
+  color: #9b957f;
+  border: 1px solid #C5B7A2;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  margin: 10px;
+  
+}
+.confirmButton a {
+  color: #545041;
+  text-decoration: none;
+}
+
+.confirmButton:hover,
+.confirmButton:active {
+  background-color: #C5B7A2;
 }

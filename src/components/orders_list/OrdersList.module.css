@@ -1,7 +1,9 @@
 .container {
     display: flex;
-    height: 700px;
+    height: 100%;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-content: center;
+    padding: 20px 10px;
 }
+

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UserOrder } from '../../model/UserOrderModel'
 import styles from './OrdersList.module.css'
+import OrdersListItem from './OrdersListItem'
 
 function OrdersList() {
   const [ordersList, setOrdersList] = useState<UserOrder[]>([])
@@ -30,7 +31,8 @@ function OrdersList() {
     ) : (
       <div className={styles.container}>
           {ordersList.map((order) => {
-            return <div>Date: {order.date} user: { order.user_id }</div>
+            return <OrdersListItem key={order.order_id} order={order} />
+            //  <div>Date: {order.date} user: { order.user_id }</div>
           })}
       </div>
     )

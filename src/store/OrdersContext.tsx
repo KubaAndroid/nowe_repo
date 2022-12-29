@@ -1,12 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { MenuItem } from "../model/MenuItemModel";
+import { OrderCartItem } from "../model/OrderCardItemModel";
 
-export class OrderCartItem {
-    id?: number = 0;
-    name?: string;
-    quantity: number = 0;
-    price: number = 0
-}
 
 type OrderedItemsContext = {
     getOrderItemQuantity: (id: number) => number
@@ -81,13 +76,14 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     }
 
     function reduceOrderItemQuantity(id: number) {
+         const newMenuItem = getMenuItemById(id)!
         setOrderItems(currentItems => {
             if (currentItems.find(item => item.id === id)?.quantity === 1) {
                 return currentItems.filter(item => item.id !== id)
             } else {
                 return currentItems.map(item => {
                     if (item.id === id) {
-                        return {...item, quantity: item.quantity - 1, price: item.price - item.price}
+                        return {...item, quantity: item.quantity - 1, price: item.price - newMenuItem.price}
                     } else {
                         return item
                     }

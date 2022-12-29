@@ -1,8 +1,6 @@
-import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './MainNavigation.module.css'
-import pyra from '../../img/potato_logo.png';
-// import OrderContext from '../../store/order-context';
+import pyra from '../../assets/img/potato_logo.png';
 import { useOrderContext } from '../../store/OrdersContext';
 
 const MainNavigation = () => {
@@ -21,10 +19,10 @@ const MainNavigation = () => {
               <nav>
                   <ul>
                     <li><Link to='/'>Menu</Link></li>
-              <li><Link to='/order'>
-                Order
-                <span className={styles.badge}>{orderQuantity}</span>
-              </Link></li>
+                    <li><Link to='/order'>
+                        Order
+                        <span className={styles.badge}>{orderQuantity}</span>
+                    </Link></li>
                     <li><Link to='/orderslist'>Orders List</Link></li>
                   </ul>
               </nav>

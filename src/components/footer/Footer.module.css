@@ -1,14 +1,25 @@
 .footer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-top: 0;
   width: 80%;
   height: 5rem;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: #C5B7A2;
-  padding: 0 10%;
+  /* background-color: #C5B7A2; */
+  background-color: #E8E3D6;
+  padding: 0;
 }
 
 .footer a {
   text-decoration: none;
+  color: #2c292b;
+}
+
+.footer a:hover, a:visited {
+  text-decoration: none;
+  color: #2c292b;
 }

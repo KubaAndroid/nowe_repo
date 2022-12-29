@@ -1,0 +1,14 @@
+.orderListItem {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    text-align: left;
+    border: 1px solid #e0d7c9;
+    border-radius: 14px;
+    margin: 10px;
+}
+
+.orderListItem:hover {
+    background-color: #e9e6e2;
+    cursor: pointer;
+}

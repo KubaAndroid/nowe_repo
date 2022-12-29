@@ -1,24 +1,20 @@
-import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
-import { MenuItem } from "../model/MenuItemModel"
-// import OrderContext from "../store/order-context"
-import { useOrderContext, OrderCartItem } from '../store/OrdersContext';
+import OrderItem from "../components/orders/OrderItem";
+import { useOrderContext } from '../store/OrdersContext';
+import styles from '../components/orders/OrderItem.module.css'
 
 
 const OrderPage = () => {
-  const { orderedMenuItems, orderedItems } = useOrderContext()
+  const { orderedItems } = useOrderContext()
 
   return (
     <div>
       {orderedItems?.map((item) => {
-        return <div key={item.id}>
-          <p>Dish: {item.name} </p>
-          <p>Quantity: {item.quantity}</p>
-          <p> Price total: {item.price} </p>
-        </div>
+        return <OrderItem key={item.id} item={item} />
       })}
+
       <p>
-        <button>
+        <button className={styles.confirmButton}>
           <Link to='/orderConfirm'>Confirm</Link>
         </button>
       </p>
