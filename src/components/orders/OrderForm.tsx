@@ -35,6 +35,7 @@ function OrderForm() {
       address_zip_code: data.zip
     }
     console.log(_user) // TODO: save user to db
+    // TODO: add order id to user? update db?
     saveUser(_user)
     
     const orderedItemsIds = orderedMenuItems.map(({ id }) => id);
@@ -125,7 +126,7 @@ function OrderForm() {
             {errors.zip?.type === 'required' && <p role="alert">zip code is required</p>}
         </div>
       
-        <button>Place order</button> 
+        <button>Place order</button>
       </form>
     </div>
     </>

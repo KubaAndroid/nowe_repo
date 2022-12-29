@@ -1,11 +1,14 @@
 import React from 'react'
+import { MenuItem } from '../../model/MenuItemModel'
 import styles from "./MenuModal.module.css"
 
 type ModalType = {
     openedModal: Function
+    menuItem: MenuItem | undefined
 }
 
-function MenuModal({openedModal}: ModalType) {
+function MenuModal({ openedModal, menuItem }: ModalType) {
+    // TODO: add context and BUY! button
   return (
       <div className={styles.modalBackground}>
           <div className={styles.modalContainer}>
@@ -13,12 +16,10 @@ function MenuModal({openedModal}: ModalType) {
                     <button onClick={() => openedModal(false)}> X </button>
                 </div>
                 <div className={styles.title}>
-                    <h1>Title carbonara</h1>
+                  <h1>{menuItem!.name}</h1>
                 </div>
                 <div className={styles.body}>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <p>{menuItem!.description}</p>
                 </div>
                 <div className={styles.footer}>
                     <button onClick={() => openedModal(false)} id="cancelBtn">Cancel</button>

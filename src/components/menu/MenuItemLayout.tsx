@@ -6,10 +6,11 @@ import { useOrderContext } from '../../store/OrdersContext';
 
 interface MenuItemType {
     menuItem: MenuItem,
-    setIsModalOpen: React.Dispatch<React.SetStateAction<Boolean>>
+    setIsModalOpen: React.Dispatch<React.SetStateAction<Boolean>>,
+    setCurrentItem: React.Dispatch<React.SetStateAction<MenuItem>>
 }
 
-function MenuItemLayout({ menuItem, setIsModalOpen }: MenuItemType) {
+function MenuItemLayout({ menuItem, setIsModalOpen, setCurrentItem }: MenuItemType) {
     const {
         getOrderItemQuantity,
         increaseOrderItemQuantity,
@@ -22,9 +23,15 @@ function MenuItemLayout({ menuItem, setIsModalOpen }: MenuItemType) {
                 <MenuCard>
                 <div className={styles.image}>
                     <img src={menuItem.imgUrl} alt="good food!" />
-                </div>
+                    </div>
+                    {/* TODO: add spicy/vege/lactose free ICONS   */}
                 <div className={styles.content}>
-                    <h3>{menuItem.name} <button onClick={() => setIsModalOpen(true)}>Info</button></h3>
+                        <h3>{menuItem.name}</h3>
+                        <button onClick={() => {
+                            setIsModalOpen(true)
+                            setCurrentItem(menuItem)
+                        }
+                        }>Info</button>
                     <p>{menuItem.description}</p>
                     <address>Price: { menuItem.price}</address>
                 </div>

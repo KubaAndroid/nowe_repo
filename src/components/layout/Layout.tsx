@@ -10,7 +10,8 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     return (
       <div>
         <MainNavigation />
-        <main className={styles.main}>{children}</main>
+        {/* <main className={styles.main}>{children}</main> */}
+        <main>{children}</main>
         <Footer />
       </div>
   )

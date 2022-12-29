@@ -11,6 +11,7 @@ type OrderedItemsContext = {
     orderQuantity: number
     orderedItems: OrderCartItem[]
     orderedMenuItems: MenuItem[]
+    // getAllMenuItems: () => Promise<MenuItem[]>
     clearOrder: () => void
 }
 
@@ -27,20 +28,25 @@ type OrderedItemsProviderProps = {
 export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     const [orderedItems, setOrderItems] = useState<OrderCartItem[]>([])
     const [orderedMenuItems, setOrderedMenuItems] = useState<MenuItem[]>([])
-    
     const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
     useEffect(() => {
         const getMenuItems = async() => {
         const fetchedMenuItems = await fetchMenuItems()
-        setMenuItems(fetchedMenuItems)
+            setMenuItems(fetchedMenuItems)
         }
         getMenuItems()
     }, [])
+
     const fetchMenuItems = async () => {
         const res = await fetch('http://localhost:5000/menuItems')
         const data = await res.json()
         return data
     }
+
+    // const getAllMenuItems = async () => {
+    //     return menuItems
+    // }
 
     const orderQuantity = orderedItems?.reduce((quantity, item) => item.quantity + quantity, 0)
 
@@ -111,6 +117,7 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
                 orderedItems,
                 orderQuantity,
                 orderedMenuItems,
+                // getAllMenuItems,
                 clearOrder
         }}>
             {children}
