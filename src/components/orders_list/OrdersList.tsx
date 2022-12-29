@@ -30,9 +30,8 @@ function OrdersList() {
       </div>
     ) : (
       <div className={styles.container}>
-          {ordersList.map((order) => {
-            return <OrdersListItem key={order.order_id} order={order} />
-            //  <div>Date: {order.date} user: { order.user_id }</div>
+          {ordersList.map((order, index) => {
+            return <OrdersListItem key={index} order={order} />
           })}
       </div>
     )

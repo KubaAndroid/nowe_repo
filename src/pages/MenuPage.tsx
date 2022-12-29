@@ -26,10 +26,10 @@ const MenuPage = () => {
   useEffect(() => {
     const getMenuItems = async() => {
       const fetchedMenuItems = await fetchMenuItems()
-      setMenuItems(fetchedMenuItems)
+      setMenuItems(fetchedMenuItems.sort((a: MenuItem, b: MenuItem) => a.name > b.name ? 1 : -1))
       setFilteredMenuItems(fetchedMenuItems)
       setIsLoading(false)
-      setIsModalOpen(false)
+      // setIsModalOpen(false)
     }
     getMenuItems()
   }, [])
@@ -37,7 +37,7 @@ const MenuPage = () => {
   const fetchMenuItems = async () => {
     const res = await fetch('http://localhost:5000/menuItems')
     const data = await res.json()
-    return data.sort((a: MenuItem, b: MenuItem) => a.name > b.name ? 1 : -1)
+    return data
   }
 
   const filterMenuItems = (filterBy: string) => {
@@ -47,6 +47,14 @@ const MenuPage = () => {
     }
     const filteredResults = menuItems.filter(item => item.category === filterBy)
     setFilteredMenuItems(filteredResults)
+  }
+
+  const sortMenuItemsByPrice = (ascending: Boolean) => {
+    ascending ?
+      console.log(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1))
+      : console.log(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1))
+    //   setFilteredMenuItems(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1))
+    // : setFilteredMenuItems(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1))
   }
   
   if (isLoading) {
@@ -63,6 +71,10 @@ const MenuPage = () => {
               <button onClick={() => filterMenuItems(MenuCategory.spicy)}>Spicy</button>
               <button onClick={() => filterMenuItems(MenuCategory.vege)}>Vege</button>
               <button onClick={() => filterMenuItems(MenuCategory.lactose_free)}>Lactose free</button>
+            </div>
+            <div> 
+              <button onClick={() => sortMenuItemsByPrice(true)}>Sort by price asc</button>
+              <button onClick={() => sortMenuItemsByPrice(false)}>Sort by price desc</button>
             </div>
             <h2>Today's recommendations:</h2>
             <MenuList
