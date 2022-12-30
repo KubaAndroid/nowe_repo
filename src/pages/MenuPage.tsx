@@ -29,7 +29,6 @@ const MenuPage = () => {
       setMenuItems(fetchedMenuItems.sort((a: MenuItem, b: MenuItem) => a.name > b.name ? 1 : -1))
       setFilteredMenuItems(fetchedMenuItems)
       setIsLoading(false)
-      // setIsModalOpen(false)
     }
     getMenuItems()
   }, [])
