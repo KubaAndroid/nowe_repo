@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer/Footer';
 import Layout from './components/layout/Layout';
-import MainNavigation from './components/nav/MainNavigation';
+import MainNavigation from './components/header/MainNavigation';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import MenuPage from './pages/MenuPage';

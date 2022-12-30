@@ -20,12 +20,13 @@ function OrderItem({ item }: OrderType) {
             <p className={ styles.quantity}>Quantity: {item.quantity}</p>
             <p className={ styles.quantity}> Price total: {item.price} </p>
           </div>
-          <div>
-          <p>
-          <button className={styles.actionsButton} onClick={() => reduceOrderItemQuantity(item.id!)}>-</button>
-          <p className={styles.actionsButton}>{item.quantity}</p>
-          <button className={styles.actionsButton} onClick={() => increaseOrderItemQuantity(item.id!)} >+</button>
-        </p>
+          
+          <div className={styles.rightPart}>
+            <div className={styles.rightPartElement}>
+              <button onClick={() => reduceOrderItemQuantity(item.id!)}>-</button>
+              <p className={styles.orderAmountText}>{item.quantity}</p>
+              <button onClick={() => increaseOrderItemQuantity(item.id!)} >+</button>
+            </div>
             <img src={trash} alt="" style={{ height: "40px" }} onClick={() => removeOrderItem(item.id!)} />
             </div>
           </div>

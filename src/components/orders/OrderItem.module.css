@@ -1,12 +1,12 @@
 .orderItem {
-    width: 100vh;
+    width: 100%;
     border-radius: 6px;
-    box-shadow: 2px -2px 5px 2px rgba(0,0,0,0.2);
-    color: #fff;
-    background-color: #C5B7A2;
+    /* box-shadow: 2px -2px 5px 2px rgba(0,0,0,0.2); */
+    /* color: #fff; */
+    /* background-color: #C5B7A2; */
     margin: 20px auto 0 auto;
     padding: 10px 20px;
-    border: 1px solid #e0d7c9;
+    border: 1px solid #c5bcae;
     border-radius: 14px;
 }
 
@@ -27,23 +27,25 @@
   font-weight: 400;
 }
 
-
-.orderItem button {
-  font: inherit;
-  cursor: pointer;
-  color: #545041;
-  border: 1px solid #545041;
-  background-color: transparent;
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
+.rightPart {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin-right: 1.5em;
 }
 
-.orderItem button:hover,
-.orderItem button:active {
-  background-color: #ffe2ed;
+.rightPartElement {
+  display: flex;
+  flex-direction: row;
+  margin-right: 1.5em;
 }
 
-.confirmButton {
+.orderAmountText {
+  margin: 1rem;
+}
+
+/* .confirmButton {
   font: inherit;
   cursor: pointer;
   color: #9b957f;
@@ -53,13 +55,14 @@
   border-radius: 5px;
   margin: 10px;
   
-}
-.confirmButton a {
+} */
+
+/* .confirmButton a {
   color: #545041;
   text-decoration: none;
-}
+} */
 
-.confirmButton:hover,
+/* .confirmButton:hover,
 .confirmButton:active {
   background-color: #C5B7A2;
-}
+} */

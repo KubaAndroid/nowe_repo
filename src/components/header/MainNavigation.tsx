@@ -15,18 +15,18 @@ const MainNavigation = () => {
               <img src={pyra} width="100" height="100" alt='logo'/>
           </div>
         <div className={ styles.pyra}>Bar Pyra</div>
-          <div>
-              <nav>
-                  <ul>
-                    <li><Link to='/'>Menu</Link></li>
-                    <li><Link to='/order'>
-                        Order
-                        <span className={styles.badge}>{orderQuantity}</span>
-                    </Link></li>
-                    <li><Link to='/orderslist'>Orders List</Link></li>
-                  </ul>
-              </nav>
-          </div>
+        <div className={styles.navigation}>
+          <nav>
+              <ul>
+                <li><Link to='/'>Menu</Link></li>
+                <li><Link to='/order'>
+                    Order
+                    <span className={styles.badge}>{orderQuantity}</span>
+                </Link></li>
+                <li><Link to='/orderslist'>Orders List</Link></li>
+              </ul>
+          </nav>
+        </div>
     </header>
   )
 }

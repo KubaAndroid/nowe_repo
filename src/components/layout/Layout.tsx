@@ -1,7 +1,7 @@
 import styles from './Layout.module.css'
 
 import React, { FC, PropsWithChildren } from 'react'
-import MainNavigation from '../nav/MainNavigation'
+import MainNavigation from '../header/MainNavigation'
 import Footer from '../footer/Footer'
 
 type LayoutProps = PropsWithChildren<{}>

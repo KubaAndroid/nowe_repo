@@ -3,6 +3,7 @@ import MenuList from "../components/menu/MenuList";
 import { MenuItem } from "../model/MenuItemModel";
 import MenuModal from '../components/menu/MenuModal'
 import { MenuCategory } from "../model/MenuCategoryModel";
+import styles from '../components/menu/MenuPage.module.css'
 // import { useOrderContext } from "../store/OrdersContext";
 
 
@@ -62,10 +63,8 @@ const MenuPage = () => {
     return (
       <>
         {isModalOpen ? (<MenuModal menuItem={currentlySelectedMenuItem} openedModal={setIsModalOpen} />) : (
-          <section>
-            <h1>Menu</h1>
-            {/* TODO: add styles to buttons, center them */}
-            <div> 
+          <div className={styles.background}>
+            <div className={styles.categoryButtons}>
               <button onClick={() => filterMenuItems(MenuCategory.all)}>All</button>
               <button onClick={() => filterMenuItems(MenuCategory.spicy)}>Spicy</button>
               <button onClick={() => filterMenuItems(MenuCategory.vege)}>Vege</button>
@@ -75,12 +74,15 @@ const MenuPage = () => {
               <button onClick={() => sortMenuItemsByPrice(true)}>Sort by price asc</button>
               <button onClick={() => sortMenuItemsByPrice(false)}>Sort by price desc</button>
             </div>
+            <h1>Menu</h1>
+            {/* TODO: add styles to buttons, center them */}
+            
             <h2>Today's recommendations:</h2>
             <MenuList
               items={filteredMenuItems}
               setIsModalOpen={setIsModalOpen}
               setCurrentItem={setCurrentlySelectedMenuItem} />
-          </section>
+          </div>
         )}
       </>
     )

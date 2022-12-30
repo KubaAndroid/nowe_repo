@@ -10,16 +10,25 @@
   align-items: center;
   justify-content: center;
   /* background-color: #C5B7A2; */
-  background-color: #E8E3D6;
+  background-color: #dbd5cc;
+  border-radius: 0 0 15px 15px;
   padding: 0;
 }
 
-.footer a {
-  text-decoration: none;
-  color: #2c292b;
+.topLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 0.5rem;
 }
 
-.footer a:hover, a:visited {
+.footer a, a:visited  {
   text-decoration: none;
   color: #2c292b;
+  margin-left: 1.5rem;
+}
+
+.footer a:hover{
+  text-decoration: none;
+  color: #925e83;
 }

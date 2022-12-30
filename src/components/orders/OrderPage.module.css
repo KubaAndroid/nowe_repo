@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    height: 100%;
+    width: 80%;
+    background-color: #dbd5cc;
+    border-radius: 16px 16px 0 0;
+    padding: 2%;
+    background-color: #dbd5cc;
+}
+
+.container button {
+  font: inherit;
+  cursor: pointer;
+  color: #545041;
+  border: 1px solid #545041;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  transition: all 0.2s ease 0s;
+}
+
+
+button:hover,
+button:active {
+  background-color: #e9e6e2;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+button.confirmButton {
+  width: 150px;
+  margin-top: 20px;
+  align-self: center;
+}

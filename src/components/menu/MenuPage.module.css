@@ -1,0 +1,40 @@
+
+.background {
+    width: 80%;
+    margin-left: 10%;
+    background-color: #dbd5cc;
+    border-radius: 16px 16px 0 0;
+    padding: 2%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+}
+
+.categoryButtons {
+    /* background-color: #e4ded7; */
+    padding: 12px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: end;
+}
+
+.categoryButtons button {
+    margin: 0.3rem;
+    background-color: #dbd5cc;
+    cursor: pointer;
+    color: #545041;
+    border: 0px solid #e4ded7;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.categoryButtons button:hover {
+    background-color: #e4ded7;
+}
