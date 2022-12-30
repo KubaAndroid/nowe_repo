@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-left: 10%;
   width: 80%;
   padding: 3px 0;
@@ -10,12 +10,10 @@
 
 
 .logo {
-  /* width: 400px; */
   width: 35%;
 }
 
 .pyra {
-  /* width: 300px; */
   width: 30%;
   font-size: 60px;
 }
@@ -23,7 +21,7 @@
 .navigation {
   width: 35%;
   display: flex;
-  /* width: 400px; */
+  margin-bottom: 15px;
 }
 
 .header nav ul {
@@ -57,7 +55,7 @@
   margin-left: 0.5rem;
 }
 
-/* @media screen and (max-width: 1050px) {
+@media screen and (max-width: 1050px) {
   .header {
     padding: 0 6%;
   }
@@ -110,4 +108,4 @@
   .header nav {
     display: none;
   }
-} */
+}

@@ -76,7 +76,7 @@ function OrderForm() {
   
   return (
     <>
-     <div>
+     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.control}>
           <label>First name:</label>

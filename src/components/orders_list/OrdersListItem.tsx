@@ -12,7 +12,10 @@ function OrdersListItem({ order }: OrderType) {
     <div className={styles.orderListItem} onClick={() => setIsExtended(!isExtended)}>
       Date: {order.date} id: {order.menu_items} user: {user}
       {isExtended && <div>
-        <p>div is extended</p>
+        {/* <p>div is extended</p> */}
+        {order.menu_items?.map((item) => {
+          return <p>{item}</p>
+        })}
       </div>}
     </div>
     

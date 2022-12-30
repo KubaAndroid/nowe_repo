@@ -22,7 +22,7 @@ h2 {
     padding: 12px;
     border-radius: 15px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .categoryButtons button {
@@ -37,4 +37,9 @@ h2 {
 
 .categoryButtons button:hover {
     background-color: #e4ded7;
+}
+
+img.categoryIcons {
+    width: 25px;
+    /* margin-top: 2px; */
 }

@@ -5,7 +5,10 @@ import MenuModal from '../components/menu/MenuModal'
 import { MenuCategory } from "../model/MenuCategoryModel";
 import styles from '../components/menu/MenuPage.module.css'
 // import { useOrderContext } from "../store/OrdersContext";
-
+import fireIcon from '../assets/img/fire.png';
+import vegeIcon from '../assets/img/plant.png';
+import noLactoseIcon from '../assets/img/vegan.png';
+import allCategoriesIcon from '../assets/img/food.png';
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -65,10 +68,17 @@ const MenuPage = () => {
         {isModalOpen ? (<MenuModal menuItem={currentlySelectedMenuItem} openedModal={setIsModalOpen} />) : (
           <div className={styles.background}>
             <div className={styles.categoryButtons}>
-              <button onClick={() => filterMenuItems(MenuCategory.all)}>All</button>
-              <button onClick={() => filterMenuItems(MenuCategory.spicy)}>Spicy</button>
-              <button onClick={() => filterMenuItems(MenuCategory.vege)}>Vege</button>
-              <button onClick={() => filterMenuItems(MenuCategory.lactose_free)}>Lactose free</button>
+              <button onClick={() => filterMenuItems(MenuCategory.all)}>
+                <img src={allCategoriesIcon} className={styles.categoryIcons} alt="" /> All</button>
+              <button onClick={() => filterMenuItems(MenuCategory.spicy)}>
+                <img src={fireIcon} className={styles.categoryIcons} alt="" /> Spicy
+              </button>
+              <button onClick={() => filterMenuItems(MenuCategory.vege)}>
+                <img src={vegeIcon} className={styles.categoryIcons} alt="" /> Vege
+              </button>
+              <button onClick={() => filterMenuItems(MenuCategory.lactose_free)}>
+                <img src={noLactoseIcon} className={styles.categoryIcons} alt="" /> Lactose free
+              </button>
             </div>
             <div> 
               <button onClick={() => sortMenuItemsByPrice(true)}>Sort by price asc</button>
