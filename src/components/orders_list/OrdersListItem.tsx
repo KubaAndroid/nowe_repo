@@ -33,15 +33,15 @@ function OrdersListItem({ order }: OrderType) {
   orderedItems()
 
   return (
-    <div className={styles.orderListItem} onClick={() => setIsExtended(!isExtended)}>
+    <div className={styles.orderListItem} onClick={() => setIsExtended(!isExtended)} key={order.id}>
       <b>Date: {order.date} id: {order.id} </b>
       {isExtended && <div>
         <div> {client?.firstName} {client?.lastName} </div>
         <div>{client?.addressStreet} {client?.addressNumber}, {client?.addressZipCode}  {client?.addressCity} </div>
         <div>basket:
-        {boughtItems.map(item => {
+        {boughtItems.map((item, index) => {
           return (
-            <div> {item.name}</div>
+            <div key={index}> {item.name}</div>
           )
         })
           }

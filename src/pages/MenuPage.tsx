@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import MenuList from "../components/menu/MenuList";
 import { MenuItem } from "../model/MenuItemModel";
 import MenuModal from '../components/menu/MenuModal'
@@ -17,6 +17,9 @@ const MenuPage = () => {
   const [filteredMenuItems, setFilteredMenuItems] = useState<MenuItem[]>([]);
   const [currentlySelectedMenuItem, setCurrentlySelectedMenuItem] = useState<MenuItem>(menuItems[0]);
 
+  const [, updateState] = useState<object>({});
+  const forceUpdate = useCallback(() => updateState({}), []);
+  
   // const { getAllMenuItems } = useOrderContext()
   // useEffect(() => {
   //   const getMenuItems = async () => {
@@ -53,14 +56,12 @@ const MenuPage = () => {
     setFilteredMenuItems(filteredResults)
   }
 
-  const sortMenuItemsByPrice = (ascending: Boolean) => {
+  function sortMenuItemsByPrice(ascending: Boolean): void {
     if (ascending) {
       const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
-      console.log(sortedByPriceAsc)
       setFilteredMenuItems(sortedByPriceAsc)
     } else {
       const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
-      console.log(sortedByPriceDesc)
       setFilteredMenuItems(sortedByPriceDesc)
     }
   }
@@ -86,8 +87,14 @@ const MenuPage = () => {
               </button>
             </div>
             <div> 
-              <button onClick={() => sortMenuItemsByPrice(true)}>Sort by price asc</button>
-              <button onClick={() => sortMenuItemsByPrice(false)}>Sort by price desc</button>
+              <button onClick={() => {
+                sortMenuItemsByPrice(true)
+                forceUpdate()
+              }}>Sort by price asc</button>
+              <button onClick={() => {
+                sortMenuItemsByPrice(false)
+                forceUpdate()
+              }}>Sort by price desc</button>
             </div>
             <h1>Menu</h1>
             {/* TODO: add styles to buttons, center them */}

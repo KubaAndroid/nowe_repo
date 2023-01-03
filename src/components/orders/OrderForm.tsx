@@ -81,51 +81,50 @@ function OrderForm() {
         <div className={styles.control}>
           <label>First name:</label>
             <input type="text" placeholder="First name" {...register("fname", { required: true, maxLength: 80 })} />
-            {errors.fname?.type === 'required' && <p role="alert">First name is required</p>}
+            {errors.fname?.type === 'required' && <p role="alert" style={{color: 'red'}}>First name is required</p>}
         </div>
         
         <div className={styles.control}>
           <label>Last name:</label>
             <input type="text" placeholder="Last name" {...register("lname", { required: true, maxLength: 100 })} />
-            {errors.lname?.type === 'required' && <p role="alert">Last name is required</p>}
+            {errors.lname?.type === 'required' && <p role="alert" style={{color: 'red'}}>Last name is required</p>}
         </div>
 
         <div className={styles.control}>
           <label>Email:</label>
             <input type="text" placeholder="Email" {...register("email", { required: true, pattern: /^\S+@\S+$/i })} />
-            {errors.email?.type === 'required' && <p role="alert" style={{color: 'red'}}>email is required</p>}
+            {errors.email?.type === 'required' && <p role="alert" style={{color: 'red'}}>email address is required</p>}
         </div>
 
         <div className={styles.control}>
           <label>Mobile number:</label>
-            <input type="tel" placeholder="Mobile number" {...register("phone", { required: true, minLength: 6, maxLength: 12 })} />
-            {errors.phone?.type === 'required' && <p role="alert">phone number is required</p>}
+            <input type="tel" placeholder="Mobile number" {...register("phone", { required: true, minLength: 7, maxLength: 12 })} />
+            {errors.phone?.type === 'required' && <p role="alert" style={{color: 'red'}}>phone number is required</p>}
         </div>
 
         <div className={styles.control}>
           <label>street:</label>
             <input type="text" placeholder="street" {...register("street", { required: true, maxLength: 80 })} />
-             {errors.street?.type === 'required' && <p role="alert">street name is required</p>}
+             {errors.street?.type === 'required' && <p role="alert" style={{color: 'red'}}>street name is required</p>}
         </div>
       
         <div className={styles.control}>
           <label>streetNumber:</label>
-            <input type="text" placeholder="streetNumber" {...register("streetNumber", { required: true, maxLength: 80 })} />
-            {errors.streetNumber?.type === 'required' && <p role="alert">streetNumber is required</p>}
+            <input type="text" placeholder="street number" {...register("streetNumber", { required: true, maxLength: 80 })} />
+            {errors.streetNumber?.type === 'required' && <p role="alert" style={{color: 'red'}}>street number is required</p>}
         </div>
 
         <div className={styles.control}>
           <label>city:</label>
             <input type="text" placeholder="city" {...register("city", { required: true, maxLength: 80 })} />
-            {errors.city?.type === 'required' && <p role="alert">city is required</p>}
+            {errors.city?.type === 'required' && <p role="alert" style={{color: 'red'}}>city is required</p>}
         </div>
 
         <div className={styles.control}>
           <label>zip:</label>
-            <input type="text" placeholder="zip" {...register("zip", { required: true, maxLength: 80 })} />
-            {errors.zip?.type === 'required' && <p role="alert">zip code is required</p>}
+            <input type="text" placeholder="zip code" {...register("zip", { required: true, maxLength: 80 })} />
+            {errors.zip?.type === 'required' && <p role="alert" style={{color: 'red'}}>zip code is required</p>}
         </div>
-      
         <button>Place order</button>
       </form>
     </div>
