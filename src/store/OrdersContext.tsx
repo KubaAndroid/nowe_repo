@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react"
 import { MenuItem } from "../model/MenuItemModel";
 import { OrderCartItem } from "../model/OrderCardItemModel";
 import { OrderModel } from "../model/OrderModel";
@@ -21,6 +21,7 @@ type OrderedItemsContext = {
     getClientById: (id: number) => UserModel | undefined
     allMenuItems: MenuItem[]
     filteredMenuItems: MenuItem[]
+    setFilteredMenuItems: React.Dispatch<React.SetStateAction<MenuItem[]>>
     sortMenuItemsByPrice: (ascending: boolean) => void
 }
 
@@ -43,6 +44,12 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
 
     const [ordersList, setOrdersList] = useState<OrderModel[]>([])
     const [clientsList, setClientsList] = useState<UserModel[]>([])
+
+
+    // FORCE UPDATE
+    const [, updateState] = useState<object>({});
+    const forceUpdate = useCallback(() => updateState({}), []);
+
 
 
     useEffect(() => {
@@ -84,7 +91,6 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     const getMenuItems = async () => {
         if (allMenuItems.length < 1) {
             const fetchedMenuItems = await fetchMenuItems()
-            console.log(fetchedMenuItems)
             setMenuItems(fetchedMenuItems)
             setFilteredMenuItems(fetchedMenuItems)
             return fetchedMenuItems
@@ -93,19 +99,21 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
         }
     }
 
-    // let contextFilteredMenuItems = filteredMenuItems
-
     const getAllMenuItems = async() => {
         return await getMenuItems()
     }
 
     function sortMenuItemsByPrice(ascending: Boolean): void {
     if (ascending) {
-      const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
-      setFilteredMenuItems(sortedByPriceAsc)
+        const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
+        setFilteredMenuItems(sortedByPriceAsc)
+        console.log(filteredMenuItems)
+        // forceUpdate()
     } else {
-      const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
-      setFilteredMenuItems(sortedByPriceDesc)
+        const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
+        console.log(sortedByPriceDesc)
+        setFilteredMenuItems(filteredMenuItems)
+        // forceUpdate()
     }
   }
 
@@ -192,6 +200,7 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
                 getClientById,
                 allMenuItems,
                 filteredMenuItems,
+                setFilteredMenuItems,
                 sortMenuItemsByPrice
         }}>
             {children}

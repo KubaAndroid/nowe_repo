@@ -34,8 +34,6 @@ function OrderForm() {
       addressCity: data.city,
       addressZipCode: data.zip
     }
-    console.log(_user) // TODO: save user to db
-    // TODO: add order id to user? update db?
     saveUser(_user)
     
     const orderedItemsIds = orderedMenuItems.map(({ id }) => id);
@@ -45,7 +43,6 @@ function OrderForm() {
       date: new Date().toUTCString(),
       menuItems: orderedItemsIds
     }
-    console.log(_userOrder) // TODO: post order
     postOrder(_userOrder);
 
   } 

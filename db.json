@@ -1026,6 +1026,17 @@
       "addressNumber": "23423",
       "addressCity": "Poznań",
       "addressZipCode": "23423"
+    },
+    {
+      "id": 1141359,
+      "firstName": "awd",
+      "lastName": "Stick",
+      "emailAddress": "awd@email.com",
+      "phoneNumber": "32342234",
+      "addressStreet": "awdawd",
+      "addressNumber": "4a/14",
+      "addressCity": "Poznań",
+      "addressZipCode": "23423"
     }
   ],
   "comments": [
@@ -1606,6 +1617,14 @@
         29
       ],
       "id": 34
+    },
+    {
+      "userId": 1141359,
+      "date": "Tue, 03 Jan 2023 21:27:00 GMT",
+      "menuItems": [
+        16
+      ],
+      "id": 35
     }
   ]
 }

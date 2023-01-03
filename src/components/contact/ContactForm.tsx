@@ -17,7 +17,6 @@ function ContactForm() {
     const enteredEmail = emailInputRef.current?.value
     const enteredMessage = messageInputRef.current?.value
     const _userMessage: UserMessage = { email: enteredEmail, message: enteredMessage }
-    console.log(_userMessage)
     postUserComment(_userMessage)
   }
 

@@ -12,25 +12,24 @@ import allCategoriesIcon from '../assets/img/food.png';
 
 const MenuPage = () => {
 
-  const { getAllMenuItems, allMenuItems, filteredMenuItems } = useOrderContext()
-
-  const [menuItems, setMenuItems] = useState<MenuItem[]>(allMenuItems);
-  const [filteredItems, setFilteredItems] = useState<MenuItem[]>(filteredMenuItems);
+  const {
+    getAllMenuItems,
+    allMenuItems,
+    filteredMenuItems,
+    setFilteredMenuItems,
+    sortMenuItemsByPrice
+  } = useOrderContext()
 
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<Boolean>(false);
-  
-  const [currentlySelectedMenuItem, setCurrentlySelectedMenuItem] = useState<MenuItem>(menuItems[0]);
+  const [currentlySelectedMenuItem, setCurrentlySelectedMenuItem] = useState<MenuItem>(allMenuItems[0]);
 
-  const [, updateState] = useState<object>({});
-  const forceUpdate = useCallback(() => updateState({}), []);
+  // const [, updateState] = useState<object>({});
+  // const forceUpdate = useCallback(() => updateState({}), []);
 
   useEffect(() => {
     const getMenuItems = async () => {
-      const fetchedMenuItems = await getAllMenuItems()
-      setMenuItems(fetchedMenuItems.sort((a: MenuItem, b: MenuItem) => a.name > b.name ? 1 : -1))
-      setFilteredItems(fetchedMenuItems)
-      console.log(filteredItems)
+      await getAllMenuItems()
       setIsLoading(false)
     }
     getMenuItems()
@@ -38,22 +37,22 @@ const MenuPage = () => {
 
   const filterMenuItems = (filterBy: string) => {
     if (filterBy === 'all') {
-      setFilteredItems(menuItems)
+      setFilteredMenuItems(allMenuItems)
       return
     }
-    const filteredResults = menuItems.filter(item => item.category === filterBy)
-    setFilteredItems(filteredResults)
+    const filteredResults = allMenuItems.filter(item => item.category === filterBy)
+    setFilteredMenuItems(filteredResults)
   }
 
-  function sortMenuItemsByPrice(ascending: Boolean): void {
-    if (ascending) {
-      const sortedByPriceAsc = filteredItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
-      setFilteredItems(sortedByPriceAsc)
-    } else {
-      const sortedByPriceDesc = filteredItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
-      setFilteredItems(sortedByPriceDesc)
-    }
-  }
+  // function sortMenuItemsByPrice(ascending: Boolean): void {
+  //   if (ascending) {
+  //     const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
+  //     setFilteredMenuItems(sortedByPriceAsc)
+  //   } else {
+  //     const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
+  //     setFilteredMenuItems(sortedByPriceDesc)
+  //   }
+  // }
   
   if (isLoading) {
     return <div>Loading</div>
@@ -67,16 +66,14 @@ const MenuPage = () => {
                 Sort by price:
                 <button onClick={() => {
                 sortMenuItemsByPrice(true)
-                forceUpdate()
+                // forceUpdate()
                 }}>Asc</button>
                 
                 <button onClick={() => {
                 sortMenuItemsByPrice(false)
-                forceUpdate()
+                // forceUpdate()
                 }}>Desc</button>
-
               </div>
-
               <div>
                 <button onClick={() => filterMenuItems(MenuCategory.all)}>
                   <img src={allCategoriesIcon} className={styles.categoryIcons} alt="" /> All</button>
@@ -94,14 +91,14 @@ const MenuPage = () => {
 
             <div className={styles.categoryButtons}>
               <div>
-                search: <input type="text" placeholder="search for a dish" />
+                Search: <input type="text" placeholder="search for a dish" />
               </div>
             </div>
 
             <h1>Menu</h1>
             <h2>Today's recommendations:</h2>
             <MenuList
-              items={filteredItems}
+              items={filteredMenuItems}
               setIsModalOpen={setIsModalOpen}
               setCurrentItem={setCurrentlySelectedMenuItem} />
           </div>
