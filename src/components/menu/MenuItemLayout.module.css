@@ -4,7 +4,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 45%;
+
+  background-color: #EBE8E0;
+  border-radius: 36px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  /* width: 80%; */
+  margin: 1rem 1rem 1.5rem;
 }
 
 .image {
@@ -44,6 +50,11 @@
   background-color: transparent;
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
+}
+
+img.categoryIcon {
+    width: 25px;
+    /* margin-top: 2px; */
 }
 
 .actions button:hover,

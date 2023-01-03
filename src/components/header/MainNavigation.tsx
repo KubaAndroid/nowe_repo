@@ -11,9 +11,11 @@ const MainNavigation = () => {
 
     return (
         <header className={styles.header}>
-          <div className={ styles.logo}>
-              <img src={pyra} width="100" height="100" alt='logo'/>
-          </div>
+        <div className={styles.logo}>
+          <Link to='/'>
+            <img src={pyra} width="100" height="100" alt='logo' />
+          </Link>
+        </div>
         <div className={ styles.pyra}>Bar Pyra</div>
         <div className={styles.navigation}>
           <nav>

@@ -1,6 +1,5 @@
 import React, { FormEvent, MutableRefObject, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
-import MenuCard from '../menu/MenuCard'
 import styles from './ContactForm.module.css';
 
 class UserMessage {
@@ -35,8 +34,7 @@ function ContactForm() {
   }
 
   return (
-    <MenuCard>
-      <form className={styles.form} onSubmit={ submitHandler }>
+      <form className={styles.card} onSubmit={ submitHandler }>
         <div className={styles.control}>
           <label htmlFor='email'>Your email address:</label>
           <input type='text' required id='email' placeholder='email@address' ref={emailInputRef} />
@@ -49,7 +47,6 @@ function ContactForm() {
             <button>Send message</button>
         </div>
       </form>
-    </MenuCard>
   )
 }
 

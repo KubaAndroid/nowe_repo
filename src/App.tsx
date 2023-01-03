@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer/Footer';
-import Layout from './components/layout/Layout';
 import MainNavigation from './components/header/MainNavigation';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
@@ -12,7 +11,6 @@ import OrdersListPage from './pages/OrdersListPage';
 
 function App() {
   return (
-    // <Layout>
       <>
       <MainNavigation />
         <Routes>
@@ -23,8 +21,8 @@ function App() {
           <Route path='/contact' element={<ContactPage />} />
           <Route path='/orderConfirm' element={<OrderConfirmationPage />} />
       </Routes>
-        <Footer />
-        </>
+    <Footer />
+    </>
   );
 }
 

@@ -2,25 +2,33 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  height: 100px;
   margin-left: 10%;
   width: 80%;
   padding: 3px 0;
   background-color: #C5B7A2;
+  position: fixed;
 }
 
 
 .logo {
   width: 35%;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .pyra {
   width: 30%;
   font-size: 60px;
+  display: flex;
+  justify-content: center;
 }
 
 .navigation {
   width: 35%;
   display: flex;
+  justify-content: end;
   margin-bottom: 15px;
 }
 
@@ -43,7 +51,7 @@
 .header nav a:hover,
 .header nav a.active {
   color: #E8E3D6;
-  border-bottom: solid 5px #E8E3D6;
+  /* border-bottom: solid 5px #E8E3D6; */
   transition: all 0.2s ease 0s;
 }
 

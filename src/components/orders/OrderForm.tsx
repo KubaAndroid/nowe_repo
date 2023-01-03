@@ -25,14 +25,14 @@ function OrderForm() {
   const onSubmit: SubmitHandler<Inputs> = data => {
     const _user: UserModel = {
       id: Math.floor(Math.random() * (10000000)) + 1,
-      first_name: data.fname,
-      last_name: data.lname,
-      email_address: data.email,
-      phone_number: data.phone,
-      address_street: data.street,
-      address_number: data.streetNumber,
-      address_city: data.city,
-      address_zip_code: data.zip
+      firstName: data.fname,
+      lastName: data.lname,
+      emailAddress: data.email,
+      phoneNumber: data.phone,
+      addressStreet: data.street,
+      addressNumber: data.streetNumber,
+      addressCity: data.city,
+      addressZipCode: data.zip
     }
     console.log(_user) // TODO: save user to db
     // TODO: add order id to user? update db?
@@ -41,9 +41,9 @@ function OrderForm() {
     const orderedItemsIds = orderedMenuItems.map(({ id }) => id);
 
     const _userOrder: UserOrder = {
-      user_id: _user.id,
+      userId: _user.id,
       date: new Date().toString(),
-      menu_items: orderedItemsIds
+      menuItems: orderedItemsIds
     }
     console.log(_userOrder) // TODO: post order
     postOrder(_userOrder);

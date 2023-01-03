@@ -18,7 +18,7 @@ function OrderItem({ item }: OrderType) {
           <div>
             <p className={ styles.name}>{item.name}</p>
             <p className={ styles.quantity}>Quantity: {item.quantity}</p>
-            <p className={ styles.quantity}> Price total: {item.price} </p>
+            <p className={ styles.quantity}> Price total: {item.price.toFixed(2) } </p>
           </div>
           
           <div className={styles.rightPart}>

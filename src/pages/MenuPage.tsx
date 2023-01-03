@@ -4,7 +4,7 @@ import { MenuItem } from "../model/MenuItemModel";
 import MenuModal from '../components/menu/MenuModal'
 import { MenuCategory } from "../model/MenuCategoryModel";
 import styles from '../components/menu/MenuPage.module.css'
-// import { useOrderContext } from "../store/OrdersContext";
+import { useOrderContext } from "../store/OrdersContext";
 import fireIcon from '../assets/img/fire.png';
 import vegeIcon from '../assets/img/plant.png';
 import noLactoseIcon from '../assets/img/vegan.png';
@@ -20,7 +20,8 @@ const MenuPage = () => {
   // const { getAllMenuItems } = useOrderContext()
   // useEffect(() => {
   //   const getMenuItems = async () => {
-  //     setMenuItems(await getAllMenuItems())
+  //     const allItems = await getAllMenuItems()
+  //     setMenuItems(allItems)
   //     setIsLoading(false)
   //   }
   //   getMenuItems()
@@ -53,11 +54,15 @@ const MenuPage = () => {
   }
 
   const sortMenuItemsByPrice = (ascending: Boolean) => {
-    ascending ?
-      console.log(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1))
-      : console.log(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1))
-    //   setFilteredMenuItems(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1))
-    // : setFilteredMenuItems(filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1))
+    if (ascending) {
+      const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
+      console.log(sortedByPriceAsc)
+      setFilteredMenuItems(sortedByPriceAsc)
+    } else {
+      const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
+      console.log(sortedByPriceDesc)
+      setFilteredMenuItems(sortedByPriceDesc)
+    }
   }
   
   if (isLoading) {
@@ -76,7 +81,7 @@ const MenuPage = () => {
               <button onClick={() => filterMenuItems(MenuCategory.vege)}>
                 <img src={vegeIcon} className={styles.categoryIcons} alt="" /> Vege
               </button>
-              <button onClick={() => filterMenuItems(MenuCategory.lactose_free)}>
+              <button onClick={() => filterMenuItems(MenuCategory.lactoseFree)}>
                 <img src={noLactoseIcon} className={styles.categoryIcons} alt="" /> Lactose free
               </button>
             </div>

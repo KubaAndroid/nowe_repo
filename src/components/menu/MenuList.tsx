@@ -12,12 +12,13 @@ interface MenuType {
 function MenuList({ items, setIsModalOpen, setCurrentItem }: MenuType) {
   return (
       <div className={styles.list}>
-     
-      {items.map((item) => <MenuItemLayout
-        key={item.id}
-        menuItem={item}
-        setIsModalOpen={setIsModalOpen}
-        setCurrentItem={setCurrentItem}
+      {items.map((item, index) =>
+        <MenuItemLayout
+          key={item.id}
+          menuItem={item}
+          index={index}
+          setIsModalOpen={setIsModalOpen}
+          setCurrentItem={setCurrentItem}
       />)}
     </div>
   )
