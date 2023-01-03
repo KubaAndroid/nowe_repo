@@ -8,6 +8,7 @@
     padding: 10px 20px;
     border: 1px solid #c5bcae;
     border-radius: 14px;
+    
 }
 
 .top {
@@ -33,6 +34,7 @@
   justify-content: center;
   text-align: center;
   margin-right: 1.5em;
+  align-items: center;
 }
 
 .rightPartElement {

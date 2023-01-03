@@ -10,14 +10,18 @@ type OrderedItemsContext = {
     increaseOrderItemQuantity: (id: number) => void
     reduceOrderItemQuantity: (id: number) => void
     removeOrderItem: (id: number) => void
+
     orderQuantity: number
     orderedItems: OrderCartItem[]
     orderedMenuItems: MenuItem[]
+
     getAllMenuItems: () => Promise<MenuItem[]>
     clearOrder: () => void
-
     getMenuItemById: (id: number) => MenuItem | undefined
     getClientById: (id: number) => UserModel | undefined
+    allMenuItems: MenuItem[]
+    filteredMenuItems: MenuItem[]
+    sortMenuItemsByPrice: (ascending: boolean) => void
 }
 
 const CreateOrderedItemsContext = createContext({} as OrderedItemsContext)
@@ -33,22 +37,23 @@ type OrderedItemsProviderProps = {
 export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     const [orderedItems, setOrderItems] = useState<OrderCartItem[]>([])
     const [orderedMenuItems, setOrderedMenuItems] = useState<MenuItem[]>([])
-    const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
+    const [allMenuItems, setMenuItems] = useState<MenuItem[]>([]);
+    const [filteredMenuItems, setFilteredMenuItems] = useState<MenuItem[]>([]);
 
     const [ordersList, setOrdersList] = useState<OrderModel[]>([])
     const [clientsList, setClientsList] = useState<UserModel[]>([])
 
+
     useEffect(() => {
-        const getMenuItems = async() => {
-        const fetchedMenuItems = await fetchMenuItems()
-            setMenuItems(fetchedMenuItems)
-        }
         const getOrders = async () => {
             const fetchedOrders = await fetchOrders()
+            // console.log(fetchedOrders)
             setOrdersList(fetchedOrders)
         }
         const getClients = async () => {
             const fetchedClients = await fetchClients()
+            // console.log(fetchedClients)
             setClientsList(fetchedClients)
             
         }
@@ -75,10 +80,34 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
         return data
     }
 
-
-    const getAllMenuItems = async () => {
-        return menuItems
+    
+    const getMenuItems = async () => {
+        if (allMenuItems.length < 1) {
+            const fetchedMenuItems = await fetchMenuItems()
+            console.log(fetchedMenuItems)
+            setMenuItems(fetchedMenuItems)
+            setFilteredMenuItems(fetchedMenuItems)
+            return fetchedMenuItems
+        } else {
+            return allMenuItems
+        }
     }
+
+    // let contextFilteredMenuItems = filteredMenuItems
+
+    const getAllMenuItems = async() => {
+        return await getMenuItems()
+    }
+
+    function sortMenuItemsByPrice(ascending: Boolean): void {
+    if (ascending) {
+      const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
+      setFilteredMenuItems(sortedByPriceAsc)
+    } else {
+      const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
+      setFilteredMenuItems(sortedByPriceDesc)
+    }
+  }
 
     const orderQuantity = orderedItems?.reduce((quantity, item) => item.quantity + quantity, 0)
 
@@ -92,7 +121,7 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     }
 
     function getMenuItemById(id: number) {
-        return menuItems.find(item => item.id === id)
+        return allMenuItems.find(item => item.id === id)
     }
 
     const getClientById = (id: number) => {
@@ -160,8 +189,10 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
                 getAllMenuItems,
                 clearOrder,
                 getMenuItemById,
-                getClientById
-
+                getClientById,
+                allMenuItems,
+                filteredMenuItems,
+                sortMenuItemsByPrice
         }}>
             {children}
         </CreateOrderedItemsContext.Provider>

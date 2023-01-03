@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { UserOrder } from '../../model/UserOrderModel'
+import { useOrderContext } from '../../store/OrdersContext'
 import styles from './OrdersList.module.css'
 import OrdersListItem from './OrdersListItem'
 
 function OrdersList() {
+
+  const { getAllMenuItems, allMenuItems, filteredMenuItems } = useOrderContext()
+  
   const [ordersList, setOrdersList] = useState<UserOrder[]>([])
   const [isLoading, setIsLoading] = useState<Boolean>(true)
 

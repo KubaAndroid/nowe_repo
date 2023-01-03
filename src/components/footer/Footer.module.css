@@ -24,11 +24,11 @@
 
 .footer a, a:visited  {
   text-decoration: none;
-  color: #2c292b;
+  color: #545041;
   margin-left: 1.5rem;
 }
 
 .footer a:hover{
   text-decoration: none;
-  color: #925e83;
+  color: #e9e6e2;
 }

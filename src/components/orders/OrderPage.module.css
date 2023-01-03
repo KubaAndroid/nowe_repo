@@ -23,6 +23,15 @@
   transition: all 0.2s ease 0s;
 }
 
+.sumTotal {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 15px;
+  font-size: 20px;
+
+}
+
 
 button:hover,
 button:active {

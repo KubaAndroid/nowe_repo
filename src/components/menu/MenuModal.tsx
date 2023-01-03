@@ -1,5 +1,6 @@
 import React from 'react'
 import { MenuItem } from '../../model/MenuItemModel'
+import { useOrderContext } from '../../store/OrdersContext'
 import styles from "./MenuModal.module.css"
 
 type ModalType = {
@@ -8,7 +9,13 @@ type ModalType = {
 }
 
 function MenuModal({ openedModal, menuItem }: ModalType) {
-    // TODO: add context and BUY! button
+    const {
+        getOrderItemQuantity,
+        increaseOrderItemQuantity,
+        reduceOrderItemQuantity,
+    } = useOrderContext()
+    const quantity = getOrderItemQuantity(menuItem!.id)
+
   return (
       <div className={styles.modalBackground}>
           <div className={styles.modalContainer}>
@@ -22,8 +29,22 @@ function MenuModal({ openedModal, menuItem }: ModalType) {
                     <p>{menuItem!.description}</p>
                 </div>
                 <div className={styles.footer}>
-                    <button onClick={() => openedModal(false)} id="cancelBtn">Cancel</button>
-                    <button>Order</button>
+                  <button onClick={() => openedModal(false)} id="cancelBtn">OK</button>
+                  
+                  <div className={styles.btnContainer}> 
+                    {quantity === 0 ? (
+                        <div >
+                            <button onClick={() => increaseOrderItemQuantity(menuItem!.id)}>Buy</button>
+                        </div>
+                    ) : (
+                        <div >
+                            <button onClick={() => reduceOrderItemQuantity(menuItem!.id)}>-</button>
+                            <button>{quantity}</button>
+                            <button onClick={() => increaseOrderItemQuantity(menuItem!.id)}>+</button>
+                        </div>
+                    )}
+                    
+                  </div>
                 </div>
             </div>
     </div>

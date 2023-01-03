@@ -25,6 +25,7 @@
 .image img {
   width: 100%;
   object-fit: cover;
+  height: 350px;
 }
 
 .content {
@@ -52,14 +53,27 @@
   border-radius: 4px;
 }
 
+.content .infoBtn {
+  cursor: pointer;
+  color: #2c292b;
+  border: 1px solid #2c292b;
+  background-color: transparent;
+  border-radius: 4px;
+  padding: 5px;
+  margin: 8px;
+}
+
+.content .infoBtn:hover {
+  background-color: #e9e6e2;
+}
+
 img.categoryIcon {
     width: 25px;
-    /* margin-top: 2px; */
 }
 
 .actions button:hover,
 .actions button:active {
-  background-color: #e4ded7;
+  background-color: #f0ebe5;
 }
 
 @media screen and (max-width: 720px) {

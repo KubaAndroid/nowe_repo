@@ -42,7 +42,7 @@ function OrderForm() {
 
     const _userOrder: UserOrder = {
       userId: _user.id,
-      date: new Date().toString(),
+      date: new Date().toUTCString(),
       menuItems: orderedItemsIds
     }
     console.log(_userOrder) // TODO: post order
@@ -103,25 +103,25 @@ function OrderForm() {
         </div>
 
         <div className={styles.control}>
-          <label>street:</label>
+          <label>Street:</label>
             <input type="text" placeholder="street" {...register("street", { required: true, maxLength: 80 })} />
              {errors.street?.type === 'required' && <p role="alert" style={{color: 'red'}}>street name is required</p>}
         </div>
       
         <div className={styles.control}>
-          <label>streetNumber:</label>
+          <label>Street number:</label>
             <input type="text" placeholder="street number" {...register("streetNumber", { required: true, maxLength: 80 })} />
             {errors.streetNumber?.type === 'required' && <p role="alert" style={{color: 'red'}}>street number is required</p>}
         </div>
 
         <div className={styles.control}>
-          <label>city:</label>
+          <label>City:</label>
             <input type="text" placeholder="city" {...register("city", { required: true, maxLength: 80 })} />
             {errors.city?.type === 'required' && <p role="alert" style={{color: 'red'}}>city is required</p>}
         </div>
 
         <div className={styles.control}>
-          <label>zip:</label>
+          <label>Zip code:</label>
             <input type="text" placeholder="zip code" {...register("zip", { required: true, maxLength: 80 })} />
             {errors.zip?.type === 'required' && <p role="alert" style={{color: 'red'}}>zip code is required</p>}
         </div>

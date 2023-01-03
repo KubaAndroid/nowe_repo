@@ -14,11 +14,11 @@ const OrderPage = () => {
     <>
       <div className={styles.container}>
          { orderedItems.length < 1 && <div>Cart is empty</div>}
-        {orderedItems?.map((item) => {
+         {orderedItems?.map((item) => {
           return <OrderItem key={item.id} item={item} />
         })}
 
-        <div>sum total: { sumTotal.toFixed(2)}</div>
+        <div className={styles.sumTotal}>Sum total: { sumTotal.toFixed(2)}</div>
         { orderedItems.length > 0 && <button className={styles.confirmButton}>
           <Link to='/orderConfirm'>Confirm</Link>
         </button>}

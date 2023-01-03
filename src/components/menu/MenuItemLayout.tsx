@@ -43,7 +43,7 @@ function MenuItemLayout({ menuItem, index, setIsModalOpen, setCurrentItem }: Men
                     </div>
                 <div className={styles.content}>
                         <h3>{menuItem.name} <img className={styles.categoryIcon} src={myIcon} alt="food category" /></h3>
-                        <button onClick={() => {
+                    <button className={styles.infoBtn} onClick={() => {
                             setIsModalOpen(true)
                             setCurrentItem(menuItem)
                         }
