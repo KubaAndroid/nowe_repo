@@ -1,10 +1,11 @@
-import React, { FormEvent, MutableRefObject, useContext, useRef } from 'react'
+import React, { FormEvent, MutableRefObject, useContext, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserOrder } from '../../model/UserOrderModel';
 import { UserModel } from '../../model/UserModel';
 import styles from './OrderForm.module.css';
 import { useOrderContext } from '../../store/OrdersContext';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import OrderSnackbar from './OrderSnackbar';
 
 type Inputs = {
   fname: string,
@@ -18,6 +19,7 @@ type Inputs = {
 };
 
 function OrderForm() {
+  const [isSnackbarVisible, setIsSnackbarVisible] = useState<Boolean>(false)
   const { orderedMenuItems, clearOrder, clientsList, setClientsList } = useOrderContext()
   const { handleSubmit, register, watch, formState: { errors } } = useForm<Inputs>();
   const navigate = useNavigate();
@@ -66,9 +68,18 @@ function OrderForm() {
           }
         }).then(() => {
           // TODO: toast - order has been placed!
+        
           clearOrder();
           navigate('/', {replace: true})
         })
+  }
+
+  const showSnack = () => {
+    setIsSnackbarVisible(true)
+    setTimeout(() => {
+      setIsSnackbarVisible(false);
+      navigate('/', {replace: true})
+      }, 3000);
   }
   
   return (
@@ -79,8 +90,8 @@ function OrderForm() {
           <label>First name:</label>
             <input type="text" placeholder="First name" {...register("fname", { required: true, maxLength: 80 })} />
             {errors.fname?.type === 'required' && <p role="alert" style={{color: 'red'}}>First name is required</p>}
-        </div>
-        
+          </div>
+
         <div className={styles.control}>
           <label>Last name:</label>
             <input type="text" placeholder="Last name" {...register("lname", { required: true, maxLength: 100 })} />
@@ -123,8 +134,11 @@ function OrderForm() {
             {errors.zip?.type === 'required' && <p role="alert" style={{color: 'red'}}>zip code is required</p>}
         </div>
         <button>Place order</button>
-      </form>
-    </div>
+        </form>
+         <button onClick={() => showSnack()}>click</button>
+        {isSnackbarVisible && <OrderSnackbar />}
+      </div>
+      
     </>
   );
 }

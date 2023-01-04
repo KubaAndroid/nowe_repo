@@ -26,7 +26,7 @@ const MenuPage = () => {
 
   const [searchQuery, setSearchQuery] = useState<string>("")
 
-  const [myFilteredMenuItems, setMyFilteredMenuItems] = useState<MenuItem[]>(filteredMenuItems)
+  // const [myFilteredMenuItems, setMyFilteredMenuItems] = useState<MenuItem[]>(filteredMenuItems)
 
 
   const [, updateState] = useState<object>({});
@@ -35,7 +35,8 @@ const MenuPage = () => {
   useEffect(() => {
     const getMenuItems = async () => {
       await getAllMenuItems()
-      setMyFilteredMenuItems(filteredMenuItems)
+      // setMyFilteredMenuItems(filteredMenuItems)
+      setFilteredMenuItems(filteredMenuItems)
       setIsLoading(false)
     }
     getMenuItems()
@@ -49,7 +50,7 @@ const MenuPage = () => {
     const filteredResults = allMenuItems.filter(item => item.category === filterBy)
     // setFilteredMenuItems(filteredResults)
 
-    setMyFilteredMenuItems(filteredResults)
+    setFilteredMenuItems(filteredResults)
   }
 
   const searchMenuItems = (query: string) => {

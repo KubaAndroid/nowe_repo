@@ -1048,6 +1048,17 @@
       "addressNumber": "163/30",
       "addressCity": "Wrocław",
       "addressZipCode": "90-090"
+    },
+    {
+      "id": 5728183,
+      "firstName": "awda",
+      "lastName": "awdaw",
+      "emailAddress": "awdawd@asd.cpm",
+      "phoneNumber": "2423423",
+      "addressStreet": "234",
+      "addressNumber": "2342",
+      "addressCity": "23423",
+      "addressZipCode": "23423"
     }
   ],
   "comments": [
@@ -1649,6 +1660,14 @@
         29
       ],
       "id": 36
+    },
+    {
+      "userId": 5728183,
+      "date": "Wed, 04 Jan 2023 16:24:13 GMT",
+      "menuItems": [
+        28
+      ],
+      "id": 37
     }
   ]
 }
