@@ -24,12 +24,18 @@ const MenuPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<Boolean>(false);
   const [currentlySelectedMenuItem, setCurrentlySelectedMenuItem] = useState<MenuItem>(allMenuItems[0]);
 
-  // const [, updateState] = useState<object>({});
-  // const forceUpdate = useCallback(() => updateState({}), []);
+  const [searchQuery, setSearchQuery] = useState<string>("")
+
+  const [myFilteredMenuItems, setMyFilteredMenuItems] = useState<MenuItem[]>(filteredMenuItems)
+
+
+  const [, updateState] = useState<object>({});
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   useEffect(() => {
     const getMenuItems = async () => {
       await getAllMenuItems()
+      setMyFilteredMenuItems(filteredMenuItems)
       setIsLoading(false)
     }
     getMenuItems()
@@ -41,18 +47,21 @@ const MenuPage = () => {
       return
     }
     const filteredResults = allMenuItems.filter(item => item.category === filterBy)
-    setFilteredMenuItems(filteredResults)
+    // setFilteredMenuItems(filteredResults)
+
+    setMyFilteredMenuItems(filteredResults)
   }
 
-  // function sortMenuItemsByPrice(ascending: Boolean): void {
-  //   if (ascending) {
-  //     const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
-  //     setFilteredMenuItems(sortedByPriceAsc)
-  //   } else {
-  //     const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
-  //     setFilteredMenuItems(sortedByPriceDesc)
-  //   }
-  // }
+  const searchMenuItems = (query: string) => {
+    // TODO: cannot filter FILTERED MENU ITEMS, because there 
+    let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+    setFilteredMenuItems(queriedItems)
+
+    // let queriedItems = filteredMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+    // setMyFilteredMenuItems(queriedItems)
+    // forceUpdate()
+  }
+
   
   if (isLoading) {
     return <div>Loading</div>
@@ -66,12 +75,10 @@ const MenuPage = () => {
                 Sort by price:
                 <button onClick={() => {
                 sortMenuItemsByPrice(true)
-                // forceUpdate()
                 }}>Asc</button>
                 
                 <button onClick={() => {
                 sortMenuItemsByPrice(false)
-                // forceUpdate()
                 }}>Desc</button>
               </div>
               <div>
@@ -91,16 +98,27 @@ const MenuPage = () => {
 
             <div className={styles.categoryButtons}>
               <div>
-                Search: <input type="text" placeholder="search for a dish" />
+                Search: <input
+                  type="text"
+                  placeholder="search for a dish"
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    searchMenuItems(searchQuery)
+                  }} />
               </div>
             </div>
 
             <h1>Menu</h1>
-            <h2>Today's recommendations:</h2>
+            {/* <h2>Today's recommendations:</h2> */}
+
+            {/* TODO: myFilteredMenuItems is empty at this point */}
             <MenuList
               items={filteredMenuItems}
               setIsModalOpen={setIsModalOpen}
-              setCurrentItem={setCurrentlySelectedMenuItem} />
+              setCurrentItem={setCurrentlySelectedMenuItem}
+              searchQuery={searchQuery}
+            />
+            
           </div>
         )}
       </>

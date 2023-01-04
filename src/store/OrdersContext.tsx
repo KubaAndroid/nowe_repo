@@ -23,6 +23,9 @@ type OrderedItemsContext = {
     filteredMenuItems: MenuItem[]
     setFilteredMenuItems: React.Dispatch<React.SetStateAction<MenuItem[]>>
     sortMenuItemsByPrice: (ascending: boolean) => void
+
+    clientsList: UserModel[]
+    setClientsList: React.Dispatch<React.SetStateAction<UserModel[]>>
 }
 
 const CreateOrderedItemsContext = createContext({} as OrderedItemsContext)
@@ -45,22 +48,19 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     const [ordersList, setOrdersList] = useState<OrderModel[]>([])
     const [clientsList, setClientsList] = useState<UserModel[]>([])
 
-
+   
     // FORCE UPDATE
     const [, updateState] = useState<object>({});
     const forceUpdate = useCallback(() => updateState({}), []);
 
 
-
     useEffect(() => {
         const getOrders = async () => {
             const fetchedOrders = await fetchOrders()
-            // console.log(fetchedOrders)
             setOrdersList(fetchedOrders)
         }
         const getClients = async () => {
             const fetchedClients = await fetchClients()
-            // console.log(fetchedClients)
             setClientsList(fetchedClients)
             
         }
@@ -99,7 +99,7 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
         }
     }
 
-    const getAllMenuItems = async() => {
+    const getAllMenuItems = async () => {
         return await getMenuItems()
     }
 
@@ -108,12 +108,12 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
         const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
         setFilteredMenuItems(sortedByPriceAsc)
         console.log(filteredMenuItems)
-        // forceUpdate()
+        forceUpdate()
     } else {
         const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
         console.log(sortedByPriceDesc)
         setFilteredMenuItems(filteredMenuItems)
-        // forceUpdate()
+        forceUpdate()
     }
   }
 
@@ -201,7 +201,9 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
                 allMenuItems,
                 filteredMenuItems,
                 setFilteredMenuItems,
-                sortMenuItemsByPrice
+                sortMenuItemsByPrice,
+                clientsList,
+                setClientsList
         }}>
             {children}
         </CreateOrderedItemsContext.Provider>

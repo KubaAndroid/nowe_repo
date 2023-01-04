@@ -1037,6 +1037,17 @@
       "addressNumber": "4a/14",
       "addressCity": "Poznań",
       "addressZipCode": "23423"
+    },
+    {
+      "id": 1475523,
+      "firstName": "Jakub",
+      "lastName": "Kowalski",
+      "emailAddress": "kuba@gmail.com",
+      "phoneNumber": "50-554-333",
+      "addressStreet": "ul. Kolorowa ",
+      "addressNumber": "163/30",
+      "addressCity": "Wrocław",
+      "addressZipCode": "90-090"
     }
   ],
   "comments": [
@@ -1625,6 +1636,19 @@
         16
       ],
       "id": 35
+    },
+    {
+      "userId": 1475523,
+      "date": "Wed, 04 Jan 2023 13:55:03 GMT",
+      "menuItems": [
+        7,
+        6,
+        6,
+        29,
+        39,
+        29
+      ],
+      "id": 36
     }
   ]
 }

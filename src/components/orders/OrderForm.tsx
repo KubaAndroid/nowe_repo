@@ -18,7 +18,7 @@ type Inputs = {
 };
 
 function OrderForm() {
-  const { orderedMenuItems, clearOrder } = useOrderContext()
+  const { orderedMenuItems, clearOrder, clientsList, setClientsList } = useOrderContext()
   const { handleSubmit, register, watch, formState: { errors } } = useForm<Inputs>();
   const navigate = useNavigate();
     
@@ -54,20 +54,20 @@ function OrderForm() {
         headers: {
             "Content-Type": "application/json"
         }
-        })
+        }).then(() => setClientsList([...clientsList, user]))
     }
 
     async function postOrder(order: UserOrder) {
         await fetch('http://localhost:5000/orders', {
-        method: "POST",
-        body: JSON.stringify(order),
-        headers: {
-            "Content-Type": "application/json"
-        }
+          method: "POST",
+          body: JSON.stringify(order),
+          headers: {
+              "Content-Type": "application/json"
+          }
         }).then(() => {
           // TODO: toast - order has been placed!
           clearOrder();
-        navigate('/', {replace: true})
+          navigate('/', {replace: true})
         })
   }
   
