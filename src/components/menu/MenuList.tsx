@@ -7,15 +7,15 @@ interface MenuType {
   items: MenuItem[],
   setIsModalOpen: React.Dispatch<React.SetStateAction<Boolean>>
   setCurrentItem: React.Dispatch<React.SetStateAction<MenuItem>>
-  searchQuery: string
+  // searchQuery: string
 }
 
-function MenuList({ items, setIsModalOpen, setCurrentItem, searchQuery }: MenuType) {
+function MenuList({ items, setIsModalOpen, setCurrentItem }: MenuType) {
 
 
   return (
     <div className={styles.list}>
-      {items.filter((item) => item.name.toLowerCase().includes(searchQuery)).map((item, index) =>
+      {/* {items.filter((item) => item.name.toLowerCase().includes(searchQuery)).map((item, index) =>
         <MenuItemLayout
           key={item.id}
           menuItem={item}
@@ -23,15 +23,15 @@ function MenuList({ items, setIsModalOpen, setCurrentItem, searchQuery }: MenuTy
           setIsModalOpen={setIsModalOpen}
           setCurrentItem={setCurrentItem}
         />)
-      }
-      {/* {items.map((item, index) =>
+      } */}
+      {items.map((item, index) =>
         <MenuItemLayout
           key={item.id}
           menuItem={item}
           index={index}
           setIsModalOpen={setIsModalOpen}
           setCurrentItem={setCurrentItem}
-      />)} */}
+      />)}
     </div>
   )
 }

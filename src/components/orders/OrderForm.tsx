@@ -46,7 +46,6 @@ function OrderForm() {
       menuItems: orderedItemsIds
     }
     postOrder(_userOrder);
-
   } 
 
   async function saveUser(user: UserModel) {

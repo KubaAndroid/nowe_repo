@@ -17,52 +17,23 @@ const MenuPage = () => {
     allMenuItems,
     filteredMenuItems,
     setFilteredMenuItems,
-    sortMenuItemsByPrice
+    sortMenuItemsByPrice,
+    filterMenuItems,
+    searchMenuItems
   } = useOrderContext()
 
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<Boolean>(false);
   const [currentlySelectedMenuItem, setCurrentlySelectedMenuItem] = useState<MenuItem>(allMenuItems[0]);
 
-  const [searchQuery, setSearchQuery] = useState<string>("")
-
-  // const [myFilteredMenuItems, setMyFilteredMenuItems] = useState<MenuItem[]>(filteredMenuItems)
-
-
-  const [, updateState] = useState<object>({});
-  const forceUpdate = useCallback(() => updateState({}), []);
-
   useEffect(() => {
     const getMenuItems = async () => {
       await getAllMenuItems()
-      // setMyFilteredMenuItems(filteredMenuItems)
       setFilteredMenuItems(filteredMenuItems)
       setIsLoading(false)
     }
     getMenuItems()
   }, [])
-
-  const filterMenuItems = (filterBy: string) => {
-    if (filterBy === 'all') {
-      setFilteredMenuItems(allMenuItems)
-      return
-    }
-    const filteredResults = allMenuItems.filter(item => item.category === filterBy)
-    // setFilteredMenuItems(filteredResults)
-
-    setFilteredMenuItems(filteredResults)
-  }
-
-  const searchMenuItems = (query: string) => {
-    // TODO: cannot filter FILTERED MENU ITEMS, because there 
-    let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
-    setFilteredMenuItems(queriedItems)
-
-    // let queriedItems = filteredMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
-    // setMyFilteredMenuItems(queriedItems)
-    // forceUpdate()
-  }
-
   
   if (isLoading) {
     return <div>Loading</div>
@@ -103,21 +74,16 @@ const MenuPage = () => {
                   type="text"
                   placeholder="search for a dish"
                   onChange={(e) => {
-                    setSearchQuery(e.target.value)
-                    searchMenuItems(searchQuery)
+                    searchMenuItems(e.target.value)
                   }} />
               </div>
             </div>
 
             <h1>Menu</h1>
-            {/* <h2>Today's recommendations:</h2> */}
-
-            {/* TODO: myFilteredMenuItems is empty at this point */}
             <MenuList
               items={filteredMenuItems}
               setIsModalOpen={setIsModalOpen}
               setCurrentItem={setCurrentlySelectedMenuItem}
-              searchQuery={searchQuery}
             />
             
           </div>
