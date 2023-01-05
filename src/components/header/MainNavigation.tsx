@@ -4,10 +4,7 @@ import pyra from '../../assets/img/potato_logo.png';
 import { useOrderContext } from '../../store/OrdersContext';
 
 const MainNavigation = () => {
-  // const orderContext = useContext(OrderContext)
-  const {
-    orderQuantity
-  } = useOrderContext()
+  const { orderQuantity } = useOrderContext()
 
     return (
         <header className={styles.header}>

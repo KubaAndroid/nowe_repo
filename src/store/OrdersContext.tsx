@@ -105,12 +105,10 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
         if (ascending) {
             const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
             setFilteredMenuItems(sortedByPriceAsc)
-            console.log(filteredMenuItems)
             forceUpdate()
         } else {
             const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
-            console.log(sortedByPriceDesc)
-            setFilteredMenuItems(filteredMenuItems)
+            setFilteredMenuItems(sortedByPriceDesc)
             forceUpdate()
         }
     }
@@ -149,6 +147,7 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
 
     const searchMenuItems = (query: string) => {
         let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+        // let queriedItems = filteredMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
         setFilteredMenuItems(queriedItems)
     }
 

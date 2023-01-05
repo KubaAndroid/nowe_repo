@@ -12,3 +12,9 @@
     background-color: #e9e6e2;
     cursor: pointer;
 }
+
+.orderListRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

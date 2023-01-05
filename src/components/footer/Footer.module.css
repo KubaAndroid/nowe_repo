@@ -4,7 +4,7 @@
   margin-left: 10%;
   margin-top: 0;
   width: 80%;
-  height: 5rem;
+  height: 12rem;
   display: flex;
   text-align: center;
   align-items: center;
@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 0.5rem;
+  margin: 5px;
 }
 
 .footer a, a:visited  {
