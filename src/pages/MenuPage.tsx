@@ -9,6 +9,48 @@ import fireIcon from '../assets/img/fire.png';
 import vegeIcon from '../assets/img/plant.png';
 import noLactoseIcon from '../assets/img/vegan.png';
 import allCategoriesIcon from '../assets/img/food.png';
+import styled from "styled-components";
+
+
+const PageBackground = styled.div`
+  width: 80%;
+  margin-left: 10%;
+  background-color: #dbd5cc;
+  padding: 2%;
+  padding-top: 110px;
+`
+const H1 = styled.h1`
+  text-align: center;
+  font-size: 36px;
+`
+
+const CategoryButtons = styled.div`
+  padding: 12px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+`
+const CategoryButton = styled.button`
+  margin: 0.3rem;
+    background-color: #dbd5cc;
+    cursor: pointer;
+    color: #545041;
+    border: 0px solid #e4ded7;
+    padding: 0.5rem;
+    border-radius: 4px;
+    &:hover { 
+      background-color: #e4ded7;
+    }
+`
+
+const SearchInput = styled.input`
+    border-radius: 8px;
+    background-color: #e4ded7;
+    padding: 4px;
+    margin-left: 4px;
+    &:focus{
+    }
+`
 
 const MenuPage = () => {
 
@@ -41,52 +83,54 @@ const MenuPage = () => {
     return (
       <>
         {isModalOpen ? (<MenuModal menuItem={currentlySelectedMenuItem} openedModal={setIsModalOpen} />) : (
-          <div className={styles.background}>
-            <div className={styles.categoryButtons}>
+            <PageBackground>
+            <CategoryButtons>
               <div>
                 Sort by price:
-                <button onClick={() => {
-                sortMenuItemsByPrice(true)
-                }}>Asc</button>
+                <CategoryButton onClick={() => {
+                  sortMenuItemsByPrice(true)
+                }}>Asc</CategoryButton>
                 
-                <button onClick={() => {
-                sortMenuItemsByPrice(false)
-                }}>Desc</button>
+                <CategoryButton onClick={() => {
+                  sortMenuItemsByPrice(false)
+                }}>Desc</CategoryButton>
               </div>
               <div>
-                <button onClick={() => filterMenuItems(MenuCategory.all)}>
-                  <img src={allCategoriesIcon} className={styles.categoryIcons} alt="" /> All</button>
-                <button onClick={() => filterMenuItems(MenuCategory.spicy)}>
+                <CategoryButton onClick={() => filterMenuItems(MenuCategory.all)}>
+                  <img src={allCategoriesIcon} className={styles.categoryIcons} alt="" /> All</CategoryButton>
+                <CategoryButton onClick={() => filterMenuItems(MenuCategory.spicy)}>
                   <img src={fireIcon} className={styles.categoryIcons} alt="" /> Spicy
-                </button>
-                <button onClick={() => filterMenuItems(MenuCategory.vege)}>
+                </CategoryButton>
+                <CategoryButton onClick={() => filterMenuItems(MenuCategory.vege)}>
                   <img src={vegeIcon} className={styles.categoryIcons} alt="" /> Vege
-                </button>
-                <button onClick={() => filterMenuItems(MenuCategory.lactoseFree)}>
+                </CategoryButton>
+                <CategoryButton onClick={() => filterMenuItems(MenuCategory.lactoseFree)}>
                   <img src={noLactoseIcon} className={styles.categoryIcons} alt="" /> Lactose free
-                </button>
+                </CategoryButton>
               </div>
-            </div>
+          </CategoryButtons>
 
-            <div className={styles.categoryButtons}>
+            {/* <div className={styles.categoryButtons}> */}
+              <CategoryButtons>
+
               <div>
-                Search: <input
+                Search: <SearchInput
                   type="text"
                   placeholder="search for a dish"
                   onChange={(e) => {
                     searchMenuItems(e.target.value)
                   }} />
-              </div>
-            </div>
+                </div>
+                </CategoryButtons>
+            {/* </div> */}
 
-            <h1>Menu</h1>
+            <H1>Menu</H1>
             <MenuList
               items={filteredMenuItems}
               setIsModalOpen={setIsModalOpen}
               setCurrentItem={setCurrentlySelectedMenuItem}
             />
-            
-          </div>
+            </PageBackground>
         )}
       </>
     )

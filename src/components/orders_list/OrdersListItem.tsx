@@ -14,6 +14,17 @@ const OrderListItemLayout = styled.div`
   border: 1px solid #e0d7c9;
   border-radius: 14px;
   margin: 10px;
+  &:hover { 
+    background-color: #e9e6e2;
+    cursor: pointer;
+  }
+`
+
+const OrderListRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
 `
 
 type OrderType = {
@@ -50,28 +61,33 @@ function OrdersListItem({ order }: OrderType) {
   
 
   return (
-    // <div className={styles.orderListItem} onClick={() => setIsExtended(!isExtended)} key={order.id}>
-      <OrderListItemLayout>
-      <div className={styles.orderListRow}>
+    // <div className={styles.orderListItem} key={order.id}>
+    <OrderListItemLayout  onClick={() => setIsExtended(!isExtended)}>
+      <OrderListRow>
+      {/* <div className={styles.orderListRow}> */}
         <div>Order {order.id}</div> Date: {order.date}
-      </div>
+        {/* </div> */}
+        </OrderListRow>
       {isExtended && <div>
         <div> {client?.firstName} {client?.lastName} </div>
         <div>{client?.addressStreet} {client?.addressNumber}, {client?.addressZipCode}  {client?.addressCity} </div>
         <div><br />
           {boughtItems.map((item, index) => {
             return (
-              <div className={styles.orderListRow}>
+              // <div className={styles.orderListRow}>
+                <OrderListRow>
                 <div key={index}> {item.name}</div><div> {item.price.toFixed(2)} </div>
-              </div>
+              </OrderListRow>
             )
           })}
         </div>
         <br />
-        <div className={styles.orderListRow}>
+        {/* <div className={styles.orderListRow}> */}
+          <OrderListRow>
           <div>Sum total:</div>
-          <div> <b>{sumTotal.toFixed(2)} </b></div>
-        </div>
+            <div> <b>{sumTotal.toFixed(2)} </b></div>
+            </OrderListRow>
+        {/* </div> */}
       </div>}
       </OrderListItemLayout>
     // </div>

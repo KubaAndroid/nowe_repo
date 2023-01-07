@@ -16,14 +16,14 @@ function Footer() {
         <p><Link to='/contact'>Cookies policy</Link></p>
       </div>
 
-      <div className={styles.topLinks}>
-        <p><FontAwesomeIcon icon={ faTwitter } style={{height: '50px', margin: '10px'}}></FontAwesomeIcon></p>
+      <div className={styles.topLinksIcons}>
+        <p><FontAwesomeIcon icon={ faTwitter } style={{height: '50px'}}></FontAwesomeIcon></p>
         <p><FontAwesomeIcon icon={ faInstagram } style={{height: '50px'}}></FontAwesomeIcon></p>
         <div><FontAwesomeIcon icon={ faFacebook } style={{height: '50px'}}></FontAwesomeIcon></div>
         <FontAwesomeIcon icon={ faSnapchat } style={{height: '50px'}}></FontAwesomeIcon>
       </div>
 
-      <p>Copyright &copy; 2022</p>
+      <p>Copyright &copy; 2023</p>
     </footer>
   )
 }

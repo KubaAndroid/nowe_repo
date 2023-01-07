@@ -3,8 +3,9 @@
   flex-direction: column;
   margin-left: 10%;
   margin-top: 0;
+  margin-bottom: 10px;
   width: 80%;
-  height: 12rem;
+  height: 14rem;
   display: flex;
   text-align: center;
   align-items: center;
@@ -18,8 +19,17 @@
 .topLinks {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 80%;
   margin: 5px;
+}
+
+.topLinksIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50%;
+  margin: 25px;
 }
 
 .footer a, a:visited  {

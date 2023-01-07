@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/footer/Footer';
 import MainNavigation from './components/header/MainNavigation';
+import GlobalStyle from './GlobalStyles';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import MenuPage from './pages/MenuPage';
@@ -11,7 +12,8 @@ import OrdersListPage from './pages/OrdersListPage';
 
 function App() {
   return (
-      <>
+    <>
+      <GlobalStyle />
       <MainNavigation />
         <Routes>
           <Route path='/' element={<MenuPage />} />
