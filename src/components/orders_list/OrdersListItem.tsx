@@ -4,10 +4,22 @@ import { UserModel } from '../../model/UserModel'
 import { UserOrder } from '../../model/UserOrderModel'
 import { useOrderContext } from '../../store/OrdersContext'
 import styles from './OrdersListItem.module.css'
+import styled from "styled-components";
+
+const OrderListItemLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  text-align: left;
+  border: 1px solid #e0d7c9;
+  border-radius: 14px;
+  margin: 10px;
+`
 
 type OrderType = {
   order: UserOrder
 }
+
 function OrdersListItem({ order }: OrderType) {
   const [isExtended, setIsExtended] = useState<Boolean>(false)
   const {
@@ -38,10 +50,11 @@ function OrdersListItem({ order }: OrderType) {
   
 
   return (
-    <div className={styles.orderListItem} onClick={() => setIsExtended(!isExtended)} key={order.id}>
+    // <div className={styles.orderListItem} onClick={() => setIsExtended(!isExtended)} key={order.id}>
+      <OrderListItemLayout>
       <div className={styles.orderListRow}>
         <div>Order {order.id}</div> Date: {order.date}
-        </div>
+      </div>
       {isExtended && <div>
         <div> {client?.firstName} {client?.lastName} </div>
         <div>{client?.addressStreet} {client?.addressNumber}, {client?.addressZipCode}  {client?.addressCity} </div>
@@ -52,8 +65,7 @@ function OrdersListItem({ order }: OrderType) {
                 <div key={index}> {item.name}</div><div> {item.price.toFixed(2)} </div>
               </div>
             )
-          })
-          }
+          })}
         </div>
         <br />
         <div className={styles.orderListRow}>
@@ -61,7 +73,8 @@ function OrdersListItem({ order }: OrderType) {
           <div> <b>{sumTotal.toFixed(2)} </b></div>
         </div>
       </div>}
-    </div>
+      </OrderListItemLayout>
+    // </div>
     
   )
 }
