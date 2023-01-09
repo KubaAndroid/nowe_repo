@@ -87,18 +87,19 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     }
 
     const getMenuItems = async () => {
-        if (allMenuItems.length < 1) {
+        // if (allMenuItems.length < 1) {
             const fetchedMenuItems = await fetchMenuItems()
             setMenuItems(fetchedMenuItems)
             setFilteredMenuItems(fetchedMenuItems)
             return fetchedMenuItems
-        } else {
-            return allMenuItems
-        }
+        // } else {
+        //     return allMenuItems
+        // }
     }
 
     const getAllMenuItems = async () => {
-        return await getMenuItems()
+        await getMenuItems()
+        return allMenuItems
     }
 
     function sortMenuItemsByPrice(ascending: Boolean): void {

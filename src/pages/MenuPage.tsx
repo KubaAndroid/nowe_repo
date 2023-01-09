@@ -71,7 +71,8 @@ const MenuPage = () => {
   useEffect(() => {
     const getMenuItems = async () => {
       await getAllMenuItems()
-      setFilteredMenuItems(filteredMenuItems)
+      // setFilteredMenuItems(filteredMenuItems)
+      console.log(filteredMenuItems)
       setIsLoading(false)
     }
     getMenuItems()
