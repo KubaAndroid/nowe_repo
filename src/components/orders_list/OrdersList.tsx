@@ -6,25 +6,32 @@ import OrdersListItem from './OrdersListItem'
 
 function OrdersList() {
 
-  const { getAllMenuItems, allMenuItems, filteredMenuItems } = useOrderContext()
+  const { getAllOrders } = useOrderContext()
   
   const [ordersList, setOrdersList] = useState<UserOrder[]>([])
   const [isLoading, setIsLoading] = useState<Boolean>(true)
 
   useEffect(() => {
     const getMenuItems = async () => {
-      const fetchedOrders = await fetchOrders()
+      const fetchedOrders = await getAllOrders()
       setOrdersList(fetchedOrders)
+      console.log(ordersList)
       setIsLoading(false)
     }
     getMenuItems()
   }, [])
 
-  async function fetchOrders() {
-    const res = await fetch('http://localhost:5000/orders')
-    const data = await res.json()
-    return data
-  }
+  // TODO: get orders from context
+
+  // useEffect(() => {
+  //   const allOrders = async () => {
+  //     const fetchedOrdersList = await getAllOrders()
+  //     setOrdersList(fetchedOrdersList)
+  //     console.log(ordersList)
+  //     setIsLoading(false)
+  //   }
+  //   allOrders()
+  // })
 
   
   return (

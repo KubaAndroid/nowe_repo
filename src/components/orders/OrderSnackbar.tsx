@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import { useOrderContext } from "../../store/OrdersContext";
 import "./OrderSnackbar.css";
 
 
 const OrderSnackbar = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const {
+    clearOrder
+  } = useOrderContext()
   return (
     <div className="snackbar">
       <div className="message">The order has been placed!
-        {/* TODO: add emptying the order cart */}
-        <button onClick={() => navigate('/', {replace: true})}>OK</button>
+        <button onClick={() => {
+          clearOrder();
+          navigate('/', { replace: true });
+        }}>OK</button>
       </div>
     </div>
   );

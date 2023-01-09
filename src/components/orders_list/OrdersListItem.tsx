@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MenuItem } from '../../model/MenuItemModel'
 import { UserModel } from '../../model/UserModel'
 import { UserOrder } from '../../model/UserOrderModel'
@@ -50,6 +50,7 @@ function OrdersListItem({ order }: OrderType) {
         boughtItems.push(menuItem)
       }
     })
+    console.log(boughtItems)
     sumTotal = boughtItems.reduce((sum, item) => {
     return sum + item.price;
   }, 0)
@@ -58,15 +59,10 @@ function OrdersListItem({ order }: OrderType) {
 
   orderedItems()
 
-  
-
   return (
-    // <div className={styles.orderListItem} key={order.id}>
-    <OrderListItemLayout  onClick={() => setIsExtended(!isExtended)}>
+    <OrderListItemLayout onClick={() => setIsExtended(!isExtended)}  key={order.id}>
       <OrderListRow>
-      {/* <div className={styles.orderListRow}> */}
         <div>Order {order.id}</div> Date: {order.date}
-        {/* </div> */}
         </OrderListRow>
       {isExtended && <div>
         <div> {client?.firstName} {client?.lastName} </div>
@@ -74,7 +70,6 @@ function OrdersListItem({ order }: OrderType) {
         <div><br />
           {boughtItems.map((item, index) => {
             return (
-              // <div className={styles.orderListRow}>
                 <OrderListRow>
                 <div key={index}> {item.name}</div><div> {item.price.toFixed(2)} </div>
               </OrderListRow>
@@ -82,15 +77,12 @@ function OrdersListItem({ order }: OrderType) {
           })}
         </div>
         <br />
-        {/* <div className={styles.orderListRow}> */}
           <OrderListRow>
           <div>Sum total:</div>
             <div> <b>{sumTotal.toFixed(2)} </b></div>
             </OrderListRow>
-        {/* </div> */}
       </div>}
       </OrderListItemLayout>
-    // </div>
     
   )
 }

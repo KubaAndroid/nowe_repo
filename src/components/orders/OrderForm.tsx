@@ -21,7 +21,7 @@ type Inputs = {
 function OrderForm() {
   const [isSnackbarVisible, setIsSnackbarVisible] = useState<Boolean>(false)
   const { orderedMenuItems, clearOrder, clientsList, setClientsList } = useOrderContext()
-  const { handleSubmit, register, watch, formState: { errors } } = useForm<Inputs>();
+  const { handleSubmit, register, formState: { errors } } = useForm<Inputs>();
   const navigate = useNavigate();
     
   const onSubmit: SubmitHandler<Inputs> = data => {
