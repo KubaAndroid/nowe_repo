@@ -182,10 +182,10 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
         setFilteredMenuItems(filteredResults)
     }
 
-    const searchMenuItems = async (query: string) => {
+    const searchMenuItems = (query: string) => {
         console.log(query)
         //
-        await setSearchQuery(query.toLowerCase())
+        setSearchQuery(query.toLowerCase())
 
         //
         // let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
