@@ -10,9 +10,10 @@ type OrderedItemsContext = {
     increaseOrderItemQuantity: (id: number) => void
     reduceOrderItemQuantity: (id: number) => void
     removeOrderItem: (id: number) => void
-
     orderQuantity: number
+
     orderedItems: OrderCartItem[]
+    setOrdersList: React.Dispatch<React.SetStateAction<OrderModel[]>>
     orderedMenuItems: MenuItem[]
 
     getAllMenuItems: () => Promise<MenuItem[]>
@@ -40,11 +41,11 @@ export function useOrderContext() {
     return useContext(CreateOrderedItemsContext)
 }
 
-type OrderedItemsProviderProps = {
+type ContextProviderProps = {
     children: ReactNode
 }
 
-export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
+export function OrderedItemsProvider({ children }: ContextProviderProps) {
     const [orderedItems, setOrderItems] = useState<OrderCartItem[]>([])
     const [orderedMenuItems, setOrderedMenuItems] = useState<MenuItem[]>([])
     const [allMenuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -55,6 +56,8 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
     const [, updateState] = useState<object>({});
     const forceUpdate = useCallback(() => updateState({}), []);
 
+    const [currentFilter, setCurrentFilter] = useState<string>("")
+    const [searchQuery, setSearchQuery] = useState<string>("")
 
     useEffect(() => {
         const getOrders = async () => {
@@ -159,17 +162,44 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
 
     const filterMenuItems = (filterBy: string) => {
         if (filterBy === 'all') {
+            //
+            setCurrentFilter('')
             setFilteredMenuItems(allMenuItems)
             return
         }
-        const filteredResults = allMenuItems.filter(item => item.category === filterBy)
+        //
+        setCurrentFilter(filterBy)
+        // const filteredResults = allMenuItems.filter(item => item.category === filterBy)
+
+        /// 
+        // const filteredResults = allMenuItems.filter(item => item.category.includes(filterBy))
+        
+        const filteredResults = allMenuItems.filter(item => item.category.includes(currentFilter) && 
+            item.name.toLowerCase().includes(searchQuery))
+
+
+
         setFilteredMenuItems(filteredResults)
     }
 
-    const searchMenuItems = (query: string) => {
-        let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+    const searchMenuItems = async (query: string) => {
+        console.log(query)
+        //
+        await setSearchQuery(query.toLowerCase())
+
+        //
+        // let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
+        ///
+        // let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase())
+        //     && item.category.includes(currentFilter))
+        
+        let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(searchQuery)
+            && item.category.includes(currentFilter))
+
         // let queriedItems = filteredMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
         setFilteredMenuItems(queriedItems)
+        console.log(searchQuery)
+        console.log(filteredMenuItems)
     }
 
     function increaseOrderItemQuantity(id: number) {
@@ -224,6 +254,7 @@ export function OrderedItemsProvider({ children }: OrderedItemsProviderProps) {
                 reduceOrderItemQuantity,
                 removeOrderItem,
                 orderedItems,
+                setOrdersList,
                 orderQuantity,
                 orderedMenuItems,
                 getAllMenuItems,

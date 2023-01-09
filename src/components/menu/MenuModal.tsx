@@ -26,11 +26,9 @@ function MenuModal({ openedModal, menuItem }: ModalType) {
                   <h1>{menuItem!.name}</h1>
                 </div>
                 <div className={styles.body}>
-                    <p>{menuItem!.description}</p>
+                  <p>{menuItem!.description}</p>
                 </div>
                 <div className={styles.footer}>
-                  <button onClick={() => openedModal(false)} id="cancelBtn">OK</button>
-                  
                   <div className={styles.btnContainer}> 
                     {quantity === 0 ? (
                         <div >

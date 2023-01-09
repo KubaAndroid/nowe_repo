@@ -52,6 +52,14 @@ const SearchInput = styled.input`
     }
 `
 
+const IsLoading = styled.div`
+width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+`
+
 const MenuPage = () => {
 
   const {
@@ -78,8 +86,13 @@ const MenuPage = () => {
     getMenuItems()
   }, [])
   
+
   if (isLoading) {
-    return <div>Loading</div>
+    return (
+      <PageBackground>
+        <IsLoading>Loading...</IsLoading>
+      </PageBackground>
+    )
   } else {
     return (
       <>

@@ -49,7 +49,7 @@ function MenuItemLayout({ menuItem, index, setIsModalOpen, setCurrentItem }: Men
                         }
                         }>Info</button>
                     {index < 4 ? <p>{menuItem.description}</p> : null}
-                    <address>Price: { menuItem.price}</address>
+                    <address>Price: { menuItem.price.toFixed(2)}</address>
                 </div>
                 <div className={styles.actions}> 
                     {quantity === 0 ? (

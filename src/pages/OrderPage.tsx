@@ -19,9 +19,9 @@ const OrderPage = () => {
         })}
         {orderedItems.length > 0 && <>
           <div className={styles.sumTotal}>Sum total: {sumTotal.toFixed(2)}</div>
-          <button className={styles.confirmButton}>
-            <Link to='/orderConfirm'>Confirm</Link>
-          </button>
+          <div className={styles.confirmOrder}>
+            <Link to='/orderConfirm'><button className={styles.confirmButton}>Confirm</button></Link>
+            </div>
         </>}
       </div>
       </>  

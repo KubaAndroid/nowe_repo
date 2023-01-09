@@ -3,11 +3,11 @@
   left: 50%;
   bottom: 0%;
   transform: translate(-50%, -50%);
-  width: 80%;
-  height: 120px;
-  border-radius: 8px;
+  width: 60%;
+  height: 60px;
+  border-radius: 18px;
   border: 1px solid #545041;
-  background-color: #e4ded7;
+  background-color: #EBE8E0;
   padding: 15px;
   display: flex;
   align-items: center;

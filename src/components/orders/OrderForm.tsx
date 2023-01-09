@@ -20,7 +20,7 @@ type Inputs = {
 
 function OrderForm() {
   const [isSnackbarVisible, setIsSnackbarVisible] = useState<Boolean>(false)
-  const { orderedMenuItems, clearOrder, clientsList, setClientsList } = useOrderContext()
+  const { orderedMenuItems, clearOrder, clientsList, setClientsList, ordersList, setOrdersList } = useOrderContext()
   const { handleSubmit, register, formState: { errors } } = useForm<Inputs>();
   const navigate = useNavigate();
     
@@ -66,10 +66,10 @@ function OrderForm() {
               "Content-Type": "application/json"
           }
         }).then(() => {
-          // TODO: toast - order has been placed!
-        
-          clearOrder();
-          navigate('/', {replace: true})
+        // setOrdersList([...ordersList, order])
+        showSnack()
+          // clearOrder();
+          // navigate('/', {replace: true})
         })
   }
 
@@ -77,7 +77,8 @@ function OrderForm() {
     setIsSnackbarVisible(true)
     setTimeout(() => {
       setIsSnackbarVisible(false);
-      navigate('/', {replace: true})
+      clearOrder();
+      navigate('/', { replace: true });
       }, 3000);
   }
   
@@ -134,7 +135,7 @@ function OrderForm() {
         </div>
         <button>Place order</button>
         </form>
-         <button onClick={() => showSnack()}>click</button>
+         {/* <button onClick={() => showSnack()}>click</button> */}
         {isSnackbarVisible && <OrderSnackbar />}
       </div>
       
