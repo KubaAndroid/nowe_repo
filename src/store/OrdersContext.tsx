@@ -174,7 +174,7 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
         /// 
         // const filteredResults = allMenuItems.filter(item => item.category.includes(filterBy))
         
-        const filteredResults = allMenuItems.filter(item => item.category.includes(currentFilter) && 
+        const filteredResults = allMenuItems.filter(item => item.category.includes(filterBy) && 
             item.name.toLowerCase().includes(searchQuery))
 
 
