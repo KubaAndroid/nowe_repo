@@ -20,19 +20,6 @@ function OrdersList() {
     }
     getMenuItems()
   }, [])
-
-  // TODO: get orders from context
-
-  // useEffect(() => {
-  //   const allOrders = async () => {
-  //     const fetchedOrdersList = await getAllOrders()
-  //     setOrdersList(fetchedOrdersList)
-  //     console.log(ordersList)
-  //     setIsLoading(false)
-  //   }
-  //   allOrders()
-  // })
-
   
   return (
     isLoading ? (

@@ -31,6 +31,13 @@ type OrderType = {
   order: UserOrder
 }
 
+type SingleListItem = {
+  name: string,
+  price: number,
+  quantity: number
+}
+
+
 function OrdersListItem({ order }: OrderType) {
   const [isExtended, setIsExtended] = useState<Boolean>(false)
   const {
@@ -41,19 +48,39 @@ function OrdersListItem({ order }: OrderType) {
   const clientId = order.userId!
   const client = getClientById(clientId)
   let sumTotal: number = 0
-  
+
+  // let displayItem = new Map<number, SingleListItem>()
+  let displayItemsArray: Map<number, SingleListItem>[] = []
+
   const boughtItems: MenuItem[] = []
+  // TODO: GROUP ITEMS WITH SAME ID - NAME, COUNT, PRICE, SUM = PRICE X COUNT
+  // TODO: display grouped items: ITEM_1 x3 ...... $33.33
   const orderedItems = () => {
+    let displayItem = new Map<number, SingleListItem>()
     order.menuItems?.forEach(itemId => {
+      
       let menuItem = getMenuItemById(itemId)
+
       if (menuItem != null || menuItem !== undefined) {
         boughtItems.push(menuItem)
+        let currentItem = displayItem.get(itemId)
+
+        if (currentItem === null || currentItem === undefined) {
+          displayItem.set(itemId, { name: menuItem?.name ?? "", price: menuItem?.price ?? 0, quantity: 1 })
+
+        } else {
+          currentItem.price += menuItem.price
+          currentItem.quantity += 1
+        }
+        
       }
     })
-    console.log(boughtItems)
+    displayItemsArray.push(displayItem)
+    console.log(displayItem)
     sumTotal = boughtItems.reduce((sum, item) => {
-    return sum + item.price;
-  }, 0)
+      return sum + item.price;
+    }, 0)
+    console.log(displayItemsArray)
     return boughtItems
   }
 
@@ -64,10 +91,20 @@ function OrdersListItem({ order }: OrderType) {
       <OrderListRow>
         <div>Order {order.id}</div> Date: {order.date}
         </OrderListRow>
+      
       {isExtended && <div>
         <div> {client?.firstName} {client?.lastName} </div>
         <div>{client?.addressStreet} {client?.addressNumber}, {client?.addressZipCode}  {client?.addressCity} </div>
         <div><br />
+          
+          {/* {displayItems.entries().map((item, index) => {
+            return (
+                <OrderListRow>
+                <div key={index}> {item.name}</div><div> {item.price.toFixed(2)} </div>
+              </OrderListRow>
+            )
+          })} */}
+
           {boughtItems.map((item, index) => {
             return (
                 <OrderListRow>
