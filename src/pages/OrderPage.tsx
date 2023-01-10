@@ -4,6 +4,7 @@ import { useOrderContext } from '../store/OrdersContext';
 import styles from '../components/orders/OrderPage.module.css'
 
 
+
 const OrderPage = () => {
   const { orderedItems } = useOrderContext()
   let sumTotal = orderedItems.reduce((sum, item) => {

@@ -11,6 +11,9 @@ import noLactoseIcon from '../assets/img/vegan.png';
 import allCategoriesIcon from '../assets/img/food.png';
 import styled from "styled-components";
 
+interface IButtonProps {
+  isActive?: boolean
+}
 
 const PageBackground = styled.div`
   width: 80%;
@@ -19,9 +22,11 @@ const PageBackground = styled.div`
   padding: 2%;
   padding-top: 110px;
 `
+
 const H1 = styled.h1`
   text-align: center;
   font-size: 36px;
+  margin: 10px;
 `
 
 const CategoryButtons = styled.div`
@@ -30,17 +35,18 @@ const CategoryButtons = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const CategoryButton = styled.button`
+
+const CategoryButton = styled.button<IButtonProps>`
   margin: 0.3rem;
-    background-color: #dbd5cc;
-    cursor: pointer;
-    color: #545041;
-    border: 0px solid #e4ded7;
-    padding: 0.5rem;
-    border-radius: 4px;
-    &:hover { 
-      background-color: #e4ded7;
-    }
+  background-color: ${props => props.isActive ? '#e4ded7' : '#dbd5cc'};
+  cursor: pointer;
+  color: #545041;
+  border: 0px solid #e4ded7;
+  padding: 0.5rem;
+  border-radius: 4px;
+  &:hover { 
+    background-color: #e4ded7;
+  }
 `
 
 const SearchInput = styled.input`
@@ -48,8 +54,6 @@ const SearchInput = styled.input`
     background-color: #e4ded7;
     padding: 4px;
     margin-left: 4px;
-    &:focus{
-    }
 `
 
 const IsLoading = styled.div`
@@ -61,7 +65,6 @@ width: 100%;
 `
 
 const MenuPage = () => {
-
   const {
     getAllMenuItems,
     allMenuItems,
@@ -69,7 +72,8 @@ const MenuPage = () => {
     setFilteredMenuItems,
     sortMenuItemsByPrice,
     filterMenuItems,
-    searchMenuItems
+    searchMenuItems,
+    currentFilter
   } = useOrderContext()
 
   const [isLoading, setIsLoading] = useState<Boolean>(true);
@@ -94,6 +98,7 @@ const MenuPage = () => {
       </PageBackground>
     )
   } else {
+    console.log(currentFilter)
     return (
       <>
         {isModalOpen ? (<MenuModal menuItem={currentlySelectedMenuItem} openedModal={setIsModalOpen} />) : (
@@ -101,7 +106,8 @@ const MenuPage = () => {
             <CategoryButtons>
               <div>
                 Sort by price:
-                <CategoryButton onClick={() => {
+                <CategoryButton
+                  onClick={() => {
                   sortMenuItemsByPrice(true)
                 }}>Asc</CategoryButton>
                 
@@ -110,21 +116,30 @@ const MenuPage = () => {
                 }}>Desc</CategoryButton>
               </div>
               <div>
-                <CategoryButton onClick={() => filterMenuItems(MenuCategory.all)}>
-                  <img src={allCategoriesIcon} className={styles.categoryIcons} alt="" /> All</CategoryButton>
-                <CategoryButton onClick={() => filterMenuItems(MenuCategory.spicy)}>
+                <CategoryButton
+                  isActive={currentFilter === ""}
+                  onClick={() => filterMenuItems(MenuCategory.all)}>
+                  <img src={allCategoriesIcon} className={styles.categoryIcons} alt="" /> All
+                </CategoryButton>
+
+                <CategoryButton
+                  isActive={currentFilter === MenuCategory.spicy}
+                  onClick={() => filterMenuItems(MenuCategory.spicy)}>
                   <img src={fireIcon} className={styles.categoryIcons} alt="" /> Spicy
                 </CategoryButton>
-                <CategoryButton onClick={() => filterMenuItems(MenuCategory.vege)}>
+                <CategoryButton
+                  isActive={currentFilter === MenuCategory.vege}
+                  onClick={() => filterMenuItems(MenuCategory.vege)}>
                   <img src={vegeIcon} className={styles.categoryIcons} alt="" /> Vege
                 </CategoryButton>
-                <CategoryButton onClick={() => filterMenuItems(MenuCategory.lactoseFree)}>
+                <CategoryButton
+                  isActive={currentFilter === MenuCategory.lactoseFree}
+                  onClick={() => filterMenuItems(MenuCategory.lactoseFree)}>
                   <img src={noLactoseIcon} className={styles.categoryIcons} alt="" /> Lactose free
                 </CategoryButton>
               </div>
           </CategoryButtons>
 
-            {/* <div className={styles.categoryButtons}> */}
               <CategoryButtons>
 
               <div>
@@ -136,7 +151,6 @@ const MenuPage = () => {
                   }} />
                 </div>
                 </CategoryButtons>
-            {/* </div> */}
 
             <H1>Menu</H1>
             <MenuList

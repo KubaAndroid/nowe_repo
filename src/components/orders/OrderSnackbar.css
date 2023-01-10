@@ -6,12 +6,19 @@
   width: 60%;
   height: 60px;
   border-radius: 18px;
-  border: 1px solid #545041;
-  background-color: #EBE8E0;
+  border: 1px solid #b4d6a5;
+  background-color: #a2cc8e;
   padding: 15px;
   display: flex;
   align-items: center;
   text-align: center;
+
+  transform: translateY(200px);
+  transition: all 300ms;
+}
+
+.snackbar.show {
+  transform: translateY(0);
 }
 
 .snackbar button {

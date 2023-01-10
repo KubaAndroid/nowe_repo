@@ -33,6 +33,8 @@ type OrderedItemsContext = {
 
     ordersList: OrderModel[]
     getAllOrders: () => Promise<OrderModel[]>
+
+    currentFilter: string
 }
 
 const CreateOrderedItemsContext = createContext({} as OrderedItemsContext)
@@ -96,34 +98,21 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
     const getAllMenuItems = async () => {
         if (allMenuItems.length < 1) {
             const fetchedMenuItems = await fetchMenuItems()
-            // console.log(fetchedMenuItems)
             setMenuItems(fetchedMenuItems)
             setFilteredMenuItems(fetchedMenuItems)
             return fetchedMenuItems
         }
         return allMenuItems
-        // } else {
-        //     return allMenuItems
-        // }
     }
 
     const getAllOrders = async ():Promise<OrderModel[]> => {
         if (ordersList.length < 1) {
             const fetchedOrders = await fetchOrders()
             setOrdersList(fetchedOrders)
-            // console.log(fetchedOrders)
             return fetchedOrders as OrderModel[]
         }
         return ordersList as OrderModel[]
-        // } else {
-        //     return allMenuItems
-        // }
     }
-
-    // const getAllMenuItems = async () => {
-    //     await getMenuItems()
-    //     return allMenuItems
-    // }
 
     function sortMenuItemsByPrice(ascending: Boolean): void {
         if (ascending) {
@@ -162,44 +151,29 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
 
     const filterMenuItems = (filterBy: string) => {
         if (filterBy === 'all') {
-            //
             setCurrentFilter('')
-            setFilteredMenuItems(allMenuItems)
+            let filteredItems = allMenuItems.filter(item => item.name.toLowerCase().includes(searchQuery))
+            setFilteredMenuItems(filteredItems)
             return
         }
-        //
         setCurrentFilter(filterBy)
-        // const filteredResults = allMenuItems.filter(item => item.category === filterBy)
-
-        /// 
-        // const filteredResults = allMenuItems.filter(item => item.category.includes(filterBy))
-        
         const filteredResults = allMenuItems.filter(item => item.category.includes(filterBy) && 
             item.name.toLowerCase().includes(searchQuery))
-
-
-
         setFilteredMenuItems(filteredResults)
     }
 
     const searchMenuItems = (query: string) => {
-        console.log(query)
-        //
         setSearchQuery(query.toLowerCase())
-
-        //
-        // let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
-        ///
-        // let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase())
-        //     && item.category.includes(currentFilter))
-        
-        let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(searchQuery)
+         setTimeout(() => {
+            let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase())
             && item.category.includes(currentFilter))
 
-        // let queriedItems = filteredMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase()))
         setFilteredMenuItems(queriedItems)
-        console.log(searchQuery)
-        console.log(filteredMenuItems)
+         }, 1000);
+        
+        // let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase())
+        //     && item.category.includes(currentFilter))
+        // setFilteredMenuItems(queriedItems)
     }
 
     function increaseOrderItemQuantity(id: number) {
@@ -270,7 +244,8 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
                 filterMenuItems,
                 searchMenuItems,
                 ordersList,
-                getAllOrders
+                getAllOrders,
+                currentFilter
         }}>
             {children}
         </CreateOrderedItemsContext.Provider>
