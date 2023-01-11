@@ -6,16 +6,16 @@ import OrdersListItem from './OrdersListItem'
 
 function OrdersList() {
 
-  const { getAllOrders } = useOrderContext()
+  const { getAllOrders, ordersList, setOrdersList } = useOrderContext()
   
-  const [ordersList, setOrdersList] = useState<UserOrder[]>([])
+  // const [ordersList, setOrdersList] = useState<UserOrder[]>([])
   const [isLoading, setIsLoading] = useState<Boolean>(true)
 
   useEffect(() => {
     const getMenuItems = async () => {
       const fetchedOrders = await getAllOrders()
-      setOrdersList(fetchedOrders)
-      console.log(ordersList)
+      // setOrdersList(fetchedOrders)
+      console.log(fetchedOrders)
       setIsLoading(false)
     }
     getMenuItems()

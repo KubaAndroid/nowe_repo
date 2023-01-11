@@ -35,6 +35,7 @@ type OrderedItemsContext = {
     getAllOrders: () => Promise<OrderModel[]>
 
     currentFilter: string
+    currentSorting: string
 }
 
 const CreateOrderedItemsContext = createContext({} as OrderedItemsContext)
@@ -60,6 +61,8 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
 
     const [currentFilter, setCurrentFilter] = useState<string>("")
     const [searchQuery, setSearchQuery] = useState<string>("")
+
+    const [currentSorting, setCurrentSorting] = useState<string>("")
 
     useEffect(() => {
         const getOrders = async () => {
@@ -98,9 +101,9 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
     const getAllMenuItems = async () => {
         if (allMenuItems.length < 1) {
             const fetchedMenuItems = await fetchMenuItems()
-            setMenuItems(fetchedMenuItems)
-            setFilteredMenuItems(fetchedMenuItems)
-            return fetchedMenuItems
+            setMenuItems(fetchedMenuItems.sort((a: MenuItem, b: MenuItem) => a.name > b.name ? 1 : -1))
+            setFilteredMenuItems(fetchedMenuItems.sort((a: MenuItem, b: MenuItem) => a.name > b.name ? 1 : -1))
+            return fetchedMenuItems.sort((a: MenuItem, b: MenuItem) => a.name > b.name ? 1 : -1)
         }
         return allMenuItems
     }
@@ -109,6 +112,7 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
         if (ordersList.length < 1) {
             const fetchedOrders = await fetchOrders()
             setOrdersList(fetchedOrders)
+            console.log(fetchedOrders)
             return fetchedOrders as OrderModel[]
         }
         return ordersList as OrderModel[]
@@ -118,10 +122,12 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
         if (ascending) {
             const sortedByPriceAsc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price > b.price ? 1 : -1)
             setFilteredMenuItems(sortedByPriceAsc)
+            setCurrentSorting("asc")
             forceUpdate()
         } else {
             const sortedByPriceDesc = filteredMenuItems.sort((a: MenuItem, b: MenuItem) => a.price < b.price ? 1 : -1)
             setFilteredMenuItems(sortedByPriceDesc)
+             setCurrentSorting("desc")
             forceUpdate()
         }
     }
@@ -170,10 +176,6 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
 
         setFilteredMenuItems(queriedItems)
          }, 1000);
-        
-        // let queriedItems = allMenuItems.filter(item => item.name.toLowerCase().includes(query.toLowerCase())
-        //     && item.category.includes(currentFilter))
-        // setFilteredMenuItems(queriedItems)
     }
 
     function increaseOrderItemQuantity(id: number) {
@@ -245,7 +247,8 @@ export function OrderedItemsProvider({ children }: ContextProviderProps) {
                 searchMenuItems,
                 ordersList,
                 getAllOrders,
-                currentFilter
+                currentFilter,
+                currentSorting
         }}>
             {children}
         </CreateOrderedItemsContext.Provider>

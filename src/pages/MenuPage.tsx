@@ -73,7 +73,8 @@ const MenuPage = () => {
     sortMenuItemsByPrice,
     filterMenuItems,
     searchMenuItems,
-    currentFilter
+    currentFilter,
+    currentSorting
   } = useOrderContext()
 
   const [isLoading, setIsLoading] = useState<Boolean>(true);
@@ -84,7 +85,7 @@ const MenuPage = () => {
     const getMenuItems = async () => {
       const menuItems = await getAllMenuItems()
       setFilteredMenuItems(menuItems)
-      console.log(menuItems)
+      // console.log(menuItems)
       setIsLoading(false)
     }
     getMenuItems()
@@ -107,11 +108,14 @@ const MenuPage = () => {
               <div>
                 Sort by price:
                 <CategoryButton
+                  isActive={currentSorting === "asc"}
                   onClick={() => {
                   sortMenuItemsByPrice(true)
                 }}>Asc</CategoryButton>
                 
-                <CategoryButton onClick={() => {
+                <CategoryButton
+                  isActive={currentSorting === "desc"}
+                  onClick={() => {
                   sortMenuItemsByPrice(false)
                 }}>Desc</CategoryButton>
               </div>
